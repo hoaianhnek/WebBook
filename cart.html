@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"> 
+    <title>BOOK STORE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body{
+            background-color: rgb(221, 215, 215);
+        }
+        .color-header{
+            background-color:white;
+            width: 100%;
+        }
+        #search-book{
+            margin-left:2.5rem;
+            width:35rem;
+            outline:none;
+        }
+        #search-book:focus{
+            box-shadow: 1px 1px 5px 1px rgb(226, 221, 221) inset;
+        }
+        .cart{
+            height:3.5rem;
+            margin:2rem;
+            margin-left:3rem;
+        }
+        .cart-menu{
+            position: relative;
+        }
+        .cart-menu-content{
+            position: absolute;
+            display:none;
+            z-index: 1;
+            background-color:rgb(206, 245, 232);
+            box-shadow: 0px 8px 16px 0px rgba(30, 31, 30, 0.2);
+            padding:20px;
+            border-radius:10px;
+            width: 300px;
+            height: 300px;
+            
+        }
+        .cart-menu:hover .cart-menu-content{
+            display:block;
+        }
+        .login-logout{
+            margin:2.5rem;
+        }
+        .login-logout >a{
+            color:black;
+            padding:10px;
+        }
+        .login-logout >a:hover{
+            color:rgb(104, 103, 103);
+        }
+        .color-menu{
+            background-color:green;
+        }
+        .btnmenu{
+            margin-left:4rem;
+            background-color:green;
+            color:white;
+            border:none;
+        }
+        .menu-dropdown{
+            margin:10px;
+            color:white;
+        }
+        .menu-dropdown-content{
+            background-color:rgb(206, 245, 232);
+            width: 15rem;
+            margin-top:0.6rem;
+            padding:10px;
+            border-radius:5px;
+            box-shadow: 0px 10px 20px 0px rgba(30, 31, 30, 0.2);
+            transition:all 0.75s ;
+        }
+        .menu-dropdown-content .dropdown-item:hover{
+            background-color:rgb(163, 206, 206);
+        }
+        .menu-dropdown-content a:hover{
+            color:rgb(104, 76, 148);
+        }
+        .btnmenu:focus{
+            outline:none;
+        }
+        .menu-dropdown-content a{
+            display:block;
+            text-decoration: none;
+            color:black;
+        }
+        .menu-book{
+            margin-left:1rem;
+            margin-top:-3px;
+        }
+        .link-dropdown{
+            position:relative;
+        }
+        .dropdown-content{
+            display: none;
+            position:absolute;
+            z-index: 1;
+            padding:10px;
+            border-radius:5px;
+            box-shadow: 0px 10px 20px 0px rgba(30, 31, 30, 0.2);
+            background-color:rgb(206, 245, 232);
+            margin-left:12rem;
+            margin-top:-2.35rem;
+            width: 15rem;
+        }
+        .dropdown-content a{
+            padding-left:20px;
+        }
+        .link-dropdown:hover .dropdown-content{
+            display:block;
+        }
+        .dropdown-content a:hover{
+            background-color:rgb(163, 206, 206);  
+        }
+        .icon-hotline{
+            margin-right: 5rem;
+        }
+        .hotline{
+            margin-left:5px;
+            margin-top:-3px;
+        }
+        .text-hotline{
+            margin:10px;
+            color:white;
+        }
+        .header-footer{
+            background-color:green;
+            margin-top:3rem;
+            padding:50px;
+            color:white;
+        }
+       .chiso{
+           margin-bottom:1px;
+       }
+       .body-footer{
+           background-color: white;
+           margin-top:3rem;
+       }
+       .body-footer-customer{
+           margin-left:6rem;
+       }
+       .body-footer .list-unstyled a{
+           color:black;
+       }
+       .body-footer-icon{
+           border-radius:50%;
+           padding:5px 8px;
+           background-color: blue;
+       }
+       .ins{
+            background-color: rgba(245, 92, 92, 0.671);
+            padding:6px 7px;
+       }
+       .youtu{
+            background-color:red;
+       }
+       .body-footer-icon i{
+           color:white;
+       }
+       #dichvu:hover{
+           color:green;
+       }
+       .constraint-cart{
+            margin-left: 4.5rem;
+            margin-top: 3rem;
+            margin-right:3.8rem;            
+       }
+       .container-cart-product{
+           background-color:white;
+            padding: 10px;
+       }
+       .container-cart-product-title{
+            padding:10px;
+            padding-right:3rem;
+       }
+       .container-cart-product-title span{
+           margin-left:7rem;
+       }
+       .container-cart-product-item{
+           padding:10px;
+       }
+       .container-cart-product-item-name{
+           color:black;
+       }
+       .container-cart-product-item-name:hover{
+           color:green;
+       }
+       .container-cart-product-item-del{
+           color:green;
+       }
+       .container-cart-product-item-del:hover{
+           color:green;
+       }
+       .container-cart-product-item-price-entry{
+            text-decoration: line-through;
+            font-size:15px;
+            color: rgb(170, 159, 159);
+       }
+       .container-cart-product-item-price{
+           margin-right:7rem;
+       }
+       #price{
+            padding-right:2.8rem;
+           }
+        .container-cart-product-pay{
+            font-size:1.5rem;
+        }
+        #pay{
+            padding:5px; 
+            border-radius:7px;   
+            background-color:rgb(77, 148, 77);
+            color:white;
+        }
+        #pay:hover{
+            background-color:green;
+        }
+        #next-purchase{
+            border-radius:7px;
+            background-color:white;
+            padding:5px;
+        }
+        #next-purchase:hover{
+            background-color:rgb(226, 222, 222);
+        }
+    </style>
+    </head>
+    <body>
+        <div class="header color-header">      
+            <div class="d-flex">
+                    <!--logo-->
+                <a href="#"><img src="image/logo.png" alt="BOOK STORE" data-toggle="tooltip" title="Book Store"></a>
+                    <!--search-->
+                <form class="form-inline" action="/action_page.php">
+                    <input class="form-control mr-sm-2 " id="search-book" type="text" placeholder="Tìm kiếm tên sách">
+                    <button class="btn btn-success" type="submit">Tìm kiếm
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <div class="cart-menu">
+                    <a href="#"><img src="image/giohang.gif" alt="Giỏ hàng" class="cart"></a>
+                    <div class="cart-menu-content">Không có sản phẩm nào!</div>
+                </div>
+                <div class="d-flex login-logout">
+                    <a href="#" class="border-right text-decoration-none">Đăng Nhập</a>
+                    <a href="#" class="text-decoration-none">Đăng Ký</a>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between color-menu">
+                <div class="menu-dropdown dropdown">
+                    <button class="btnmenu" type="button" data-toggle="dropdown">
+                        <i class="fas fa-bars"></i>
+                        <span class="menu-book">DANH MỤC SÁCH</span>
+                    </button>
+                    <div class="menu-dropdown-content dropdown-menu">
+                        <div class="dropdown-item link-dropdown">
+                            <a class="d-flex justify-content-between" href="#">
+                                <div>Văn học</div>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="#">Văn học nước ngoài</a>
+                                <a href="#">Văn học trong nước</a>
+                                
+                            </div>
+                        </div>
+                        <div class="dropdown-item link-dropdown">
+                            <a href="#" class="d-flex justify-content-between" >
+                                <div>Ngoại ngữ</div>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="#">Tiếng anh</a>
+                                <a href="#">Tiếng nhật</a>
+                                <a href="#">Tiếng pháp</a>        
+                            </div>
+                        </div>
+                        <div class="dropdown-item link-dropdown">
+                            <a href="#" class="d-flex justify-content-between">
+                                <div>Tiểu thuyết</div>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="#">Ngôn tình</a>
+                                <a href="#">Đam mĩ</a>     
+                            </div>
+                        </div>
+                        <div class="dropdown-item link-dropdown">
+                            <a href="#" class="d-flex justify-content-between">
+                                <div>Kỹ năng mềm</div>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="#">Làm giàu</a>
+                                <a href="#">du lịch</a>     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex text-hotline">
+                    <div class="d-flex icon-hotline">
+                        <i class="fas fa-phone"></i>
+                        <span class="hotline">Hotline: 0376206101</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="constraint-cart">
+            <div class="mb-2">GIỎ HÀNG (2 sản phẩm) </div>
+            <div class="container-cart-product">
+                <div class="d-flex container-cart-product-title flex-row-reverse">
+                    <span>Số tiền</span>
+                    <span>Số lượng</span>
+                    <span>Đơn giá</span>  
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between container-cart-product-item"> 
+                    <div class="d-flex"> 
+                        <img src="image/conbo.jpg" alt="Ngay xua co mot con bo">
+                        <div>
+                            <a href="#" class="container-cart-product-item-name text-decoration-none">Ngày xưa có một con bò</a>
+                            <p>- Tác giả: Camilo Cruz</p>
+                            <p>Trạng thái: Còn hàng</p>
+                            <a href=# class="mt-2 container-cart-product-item-del">Xóa</a>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="container-cart-product-item-price">
+                            <span class="container-cart-product-item-price-entry mr-2">46.000đ</span>
+                            <span>28.990đ</span>
+                        </div>
+                        <div class="container-cart-product-item-price">
+                            <input pattern="[\d]" title="Nhap sai" type="number" name="quantity" min="1" max="100" value="1" class="ml-3">
+                        </div>
+                        <div class="text-danger" id="price">
+                            28.990đ
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between container-cart-product-item"> 
+                    <div class="d-flex"> 
+                        <img src="image/conbo.jpg" alt="Ngay xua co mot con bo">
+                        <div>
+                            <a href="#" class="container-cart-product-item-name text-decoration-none">Ngày xưa có một con bò</a>
+                            <p>- Tác giả: Camilo Cruz</p>
+                            <a href=# class="mt-2 container-cart-product-item-del">Xóa</a>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="container-cart-product-item-price">
+                            <span class="container-cart-product-item-price-entry mr-2">46.000đ</span>
+                            <span>28.990đ</span>
+                        </div>
+                        <div class="container-cart-product-item-price">
+                            <input pattern="[\d]" title="Nhap sai" type="number" name="quantity" min="1" max="100" value="1" class="ml-3">
+                        </div>
+                        <div class="text-danger" id="price">
+                            28.990đ
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <div class="d-flex justify-content-end pr-5">
+                        <span class="mr-5">Số tiền</span>
+                        <span class="ml-5">28.990đ</span>
+                    </div>
+                    <div class="d-flex justify-content-end pr-5">
+                        <span class="mr-5">Phí vận chuyển</span>
+                        <span class="ml-5">10000đ</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-end container-cart-product-pay pr-5">
+                    <span class="mr-4">THANH TOÁN</span>
+                    <span class="ml-4">38990đ</span>
+                </div>
+                <div class="d-flex justify-content-end pt-3 pr-5">
+                    <button class="mr-4" id="next-purchase">Tiếp tục mua hàng
+                        <i class="fas fa-cart-plus pr-2"></i>
+                    </button>
+                    <button id="pay">Thanh toán
+                        <i class="fas fa-chevron-circle-right pr-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+            <div class="footer">
+                    <div class="header-footer carousel slide"  data-interval="5000" id="header" data-ride="carousel">
+                        <ol class="carousel-indicators chiso">
+                            <li data-target="#header" data-slide-to="0" class="active"></li>
+                            <li data-target="#header" data-slide-to="1"></li>
+                        </ol>
+                        <!--slide-->
+                        <div class="carousel-inner text-center">
+                            <div class="carousel-item active ">
+                                <p>_CHUYỆN CON MÈO DẠY HẢI ÂU BAY, LUIS SEPÚLVEDA</p>
+                                <span>Hihi</span>
+                            </div>
+                            <div class="carousel-item">
+                                <p>_CÔ GÁI ĐẾN TỪ HÔM QUA, NGUYỄN NHẬT ÁNH_</p>
+                                <span>Tôi đã từng chờ em dài hơn những năm tháng nhạt nhòa. Dù thế nào tôi vẫn nhắc lại,
+                                    em là người dưng tôi thương nhất cuộc đời này...
+                                </span>
+                            </div>
+                        </div>
+                        <!--left and right controls-->
+                        <a class="carousel-control-prev" href="#header" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#header" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                    <div class="body-footer">
+                        <div class="row">
+                            <div class="col body-footer-customer">
+                                <p class="pt-4 font-weight-bold">HỖ TRỢ CHĂM SÓC KHÁCH HÀNG</p>
+                                <p> Địa chỉ: KTX khu B- Đông Hòa- Dĩ An- Bình Dương</p>
+                                <p> Hotline: 0376206101</p>
+                                <p> Email: 17520257@gm.uit.edu.vn</p>
+                            </div>
+                            <div class="col ml-4">
+                                <p class="pt-4 font-weight-bold">DỊCH VỤ</p>
+                                <ul class="list-unstyled">
+                                    <li class="pb-3">
+                                        <a href="#" class="text-decoration-none" id="dichvu">Giới thiệu</a>
+                                    </li>
+                                    <li class="pb-3">
+                                        <a href="#" class="text-decoration-none" id="dichvu">Điều khoản sử dụng</a>
+                                    </li>
+                                    <li class="pb-3">
+                                        <a href="#" class="text-decoration-none" id="dichvu">Hướng dẫn thanh toán</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <p class="font-weight-bold pt-4">KẾT NỐI</p>
+                                <div>
+                                    <a href="#" class="body-footer-icon">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="body-footer-icon ins ml-2">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="body-footer-icon youtu ml-2">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
