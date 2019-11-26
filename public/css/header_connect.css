@@ -1,0 +1,19 @@
+        .myself{
+            margin:2.5rem; 
+            color: black;
+        }
+        .myself >i{
+            padding:10px;
+            height: 20px;
+            padding-right: 0px;
+        }
+        .myself >span{
+            padding:10px;
+
+        }
+        .myself-icon{
+            font-size: 30px;
+        }
+        .myself:hover{
+            color:green;
+        }

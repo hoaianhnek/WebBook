@@ -1,0 +1,41 @@
+      .container-search{
+            margin:0 3.8rem 0 4.5rem;
+            background-color: white;
+            padding:15px;
+       }
+       .container-search-img img{
+            position: relative;
+            box-shadow: 0px 2px 10px 1px rgba(41, 40, 40, 0.4); 
+            z-index: 1;
+            height: 230px;
+        }
+       .container-search-discount{
+            position: absolute;
+            background-color:red;
+            color:white;
+            padding:10px 5px;
+            border-radius:50%;
+            z-index: 2;
+            opacity:0.7;
+            top: 0.3rem;
+            left: 3rem;
+       }
+       .container-search-price-entry{
+            text-decoration: line-through;
+            color:rgb(143, 134, 134);
+            font-size: 15px;
+       }
+       .container-search-price-present{
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            padding-left:10px;
+       }
+       .container-search-content{
+            margin-left: 10px;
+            margin-right: 10px;
+            border:1px solid white;
+       }
+       .container-search-content:hover{
+            border:1px solid green;
+        }

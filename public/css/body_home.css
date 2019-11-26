@@ -1,0 +1,198 @@
+/*khoi san pham dau*/
+        .body{
+            margin-left:4.5rem;
+        }
+        .carousel-inner img{
+            width: 77rem;
+            height: 400px;
+        }
+        .carousel a{
+            margin-right: 2rem;
+            margin-left:-3rem;
+        }
+        .book-sell{
+            margin-top:3rem;
+            margin-right:5.5rem;
+        }
+        .book-sell a{
+            color: green;
+            margin-right: 10px;
+        }
+        .book-sell .row{
+            margin-top:3rem;
+            margin-left:0.5rem;
+            width: 100%;
+        }
+        .book-content{
+            display: flex;
+            flex-wrap: wrap;
+            clear: both;
+            width: 100%;
+        }
+        .book-content .col-3:hover{
+            transform: scale(0.97,0.97);
+            transition: all 0.5s;
+        }
+        .book-sell-content{
+            padding:10px;
+            width: 50%;
+            min-height: 180px;
+            max-height: 180px;
+            overflow: hidden;
+        }
+        .chitiet{
+            min-height: 70px;
+            max-height: 70px;
+            overflow: hidden;
+            font-size: 12px;
+            text-align: justify;
+        }
+        .book-sell-content a{
+            color:black;
+            font-weight: bold;
+        }
+        .book-sell-content a:hover{
+            color:green;
+        }
+        
+        .book-sell-img{
+            width: 50%;
+        }
+        .book-sell-top{
+            position: relative;
+        }
+        .book-sell-img img{
+            position: absolute;
+            box-shadow: 0px 2px 10px 1px rgba(41, 40, 40, 0.4); 
+            top: -20px;
+            z-index: 1;
+        }
+        .discount{
+            position: absolute;
+            top: -2.5rem;
+            left: -1rem;
+            background-color:red;
+            color:white;
+            padding:10px 5px;
+            border-radius:50%;
+            z-index: 2;
+            opacity:0.7;
+        }
+        .background-book-sell{
+            background-color: white;
+            padding:10px;
+            box-shadow: 0px 10px 10px 0px rgba(139, 112, 112, 0.4); 
+            cursor: pointer;
+            border:1px solid white;
+        }
+        .background-book-sell:hover{
+            border:1px solid green;
+        }
+        .price-entry{
+            text-decoration: line-through;
+            color:rgb(143, 134, 134);
+            font-size: 15px;
+        }
+        .price-present{
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            padding-left:10px;
+        }
+        .book-new{
+            margin-top:3rem;
+            margin-right: 2rem;
+            margin-left: 6rem;
+        }
+        .book-new a{
+            color:green;
+        }
+        .book-new .row{
+            margin-top:3rem;
+            margin-left:0.5rem;
+        }
+        .book-new .book-sell-content a{
+            color:black;
+        }
+        .book-new .book-sell-content a:hover{
+            color:green;
+        }
+/*het khoi san pham dau*/
+/*khoi san pham thu hai*/
+
+/*het khoi san pham thu 2*/
+/*hieu ung hien thi noi dung khi hover chuot len sp*/
+        .background-book-sell {
+            position: relative;
+            width: 100%;
+        }
+        .overlay {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            background-color:#ffe066;
+            overflow: hidden;
+            width: 100%;
+            height:0;
+            transition: .5s ease;
+        }
+        .background-book-sell:hover .overlay {
+            bottom: 0;
+            height: 100%;
+            opacity: 0.5;
+        }
+        .text {
+            white-space: nowrap; 
+            color: white;
+            font-size: 50px;
+            position: absolute;
+            overflow: hidden;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+            width: 32px;
+            height: 32px;
+            text-align: center;
+            line-height: 30px;
+            background: #f5f5f5;
+            color: #33bbff;
+            cursor: pointer;
+            border: 0;
+            border-radius: 2px;
+            text-decoration: none;
+            transition: all 0.01s;
+            opacity: 0;
+        }
+        #back-to-top:hover {
+            background: green;
+        }
+        #back-to-top.show {
+            opacity: 1;
+        }
+      /*  Phân trang*/
+        .pagination{
+            margin-top:10px;
+            margin-left:50%;
+        }
+        .pagination a:hover {
+            background-color: green;
+        }
+        .page-item.active .page-link{
+            z-index: 1;
+            color: white;
+            background: green;
+            outline: none;
+            border-color:rgb(221, 215, 215);
+        }
+        .page-link:hover{
+            color: white;
+            background-color: #52FAB5;
+        }

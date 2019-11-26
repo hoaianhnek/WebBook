@@ -1,0 +1,141 @@
+body{
+    background-color: white;
+}
+.color-header{
+    background-color:white;
+    width: 100%;
+}
+
+#search-book{
+    margin-left:3.5rem;
+    width:35rem;
+    outline:none;
+}
+#search-book:focus{
+    box-shadow: 1px 1px 5px 1px rgb(226, 221, 221) inset;
+}
+.cart{
+    height:3.5rem;
+    margin:2rem;
+    margin-left:3rem;
+}
+.cart-menu{
+    position: relative;
+}
+.cart-menu-content{
+    position: absolute;
+    display:none;
+    z-index: 1;
+    background-color:rgb(206, 245, 232);
+    box-shadow: 0px 8px 16px 0px rgba(30, 31, 30, 0.2);
+    padding:20px;
+    border-radius:10px;
+    width: 300px;
+    height: 300px;
+    
+}
+.cart-menu:hover .cart-menu-content{
+    display:block;
+}
+.login-logout{
+    margin:2.5rem;
+}
+.login-logout >a{
+    color:black;
+    padding:10px;
+}
+.login-logout >a:hover{
+    color:rgb(104, 103, 103);
+}
+.color-menu{
+    background-color:green;
+}
+.btnmenu{
+    margin-left:4rem;
+    background-color:green;
+    color:white;
+    border:none;
+}
+.menu-dropdown{
+    margin:10px;
+    color:white;
+}
+.menu-dropdown-content{
+    background-color:rgb(206, 245, 232);
+    width: 15rem;
+    margin-top:0.6rem;
+    padding:10px;
+    border-radius:5px;
+    box-shadow: 0px 10px 20px 0px rgba(30, 31, 30, 0.2);
+    transition:all 0.75s ;
+}
+.menu-dropdown-content .dropdown-item:hover{
+    background-color:rgb(163, 206, 206);
+}
+.menu-dropdown-content a:hover{
+    color:rgb(104, 76, 148);
+}
+.btnmenu:focus{
+    outline:none;
+}
+.menu-dropdown-content a{
+    display:block;
+    text-decoration: none;
+    color:black;
+}
+.menu-book{
+    margin-left:1rem;
+    margin-top:-3px;
+}
+.link-dropdown{
+    position:relative;
+}
+.dropdown-content{
+    display: none;
+    position:absolute;
+    z-index: 1;
+    padding:10px;
+    border-radius:5px;
+    box-shadow: 0px 10px 20px 0px rgba(30, 31, 30, 0.2);
+    background-color:rgb(206, 245, 232);
+    margin-left:12rem;
+    margin-top:-2.35rem;
+    width: 15rem;
+}
+.dropdown-content a{
+    padding-left:20px;
+}
+.link-dropdown:hover .dropdown-content{
+    display:block;
+}
+.dropdown-content a:hover{
+    background-color:rgb(163, 206, 206);  
+}
+.icon-hotline{
+    margin-right: 5rem;
+}
+.hotline{
+    margin-left:5px;
+    margin-top:-3px;
+}
+.text-hotline{
+    margin:10px;
+    color:white;
+}
+        #login_Box_Div,#singup_Box_Div{
+            display:none;
+            background-color:white; 
+            z-index: 10;
+            position: absolute;
+            border:1px solid rgb(194, 191, 191);
+            margin-left: 30rem;
+            padding: 10px;
+            border-radius: 6px;
+            width: 25rem;
+            height: 32rem;
+            padding-left: 20px;
+            box-shadow: 0px 10px 10px 0px rgba(139, 112, 112, 0.4); 
+       }
+       #carousel{
+           z-index: 1;
+       }

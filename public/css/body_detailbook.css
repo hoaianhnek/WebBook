@@ -1,0 +1,158 @@
+       .container-product{
+           background-color: white;
+           margin-left: 3.7rem;
+           margin-top: 3rem;
+           margin-right:3rem;
+       }
+       .container-product img{
+           margin:3rem;
+           margin-left:6rem;
+           height: 330px;
+           box-shadow: 0px 5px 10px 0px rgb(182, 146, 146,0.4);
+       }
+       .container-product-content{
+            margin-top: 1.5rem;
+       }
+       .container-product-content-price-entry{
+            text-decoration: line-through;
+            font-size:20px;
+            color: rgb(170, 159, 159);
+       }
+       .container-product-content-cart{
+            margin-left:2rem;
+            margin-top:2rem;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            padding: 10px 25px;
+            border:none;
+            outline:none;
+       }
+       .container-product-content-cart:hover{
+            opacity: 0.7;
+       }
+       .container-product-content-add-cart{
+            padding: 9px 25px;
+            background-color: rgb(177, 219, 177);
+            color: green;
+            border: 1px solid green;
+            outline:none;
+       }
+       .container-product-content-add-cart:hover{
+            background-color: rgb(141, 224, 141);
+       }
+       .container-product-content-warning{
+            margin-top:20px;
+            margin-bottom:3rem;
+            border:1px solid rgb(229, 233, 7);
+            border-radius:10px;
+            padding:10px;
+            background-color: rgb(253, 253, 224);
+       }
+       .container-product-content-warning i{
+           color:rgb(241, 219, 15);
+       }
+       .container-product-content-discount{
+           margin-top:5px;
+           margin-bottom:6px;
+           background-color: red;
+           padding:2px 20px;
+           color:white;
+           text-align: center;
+           font-size:12px;
+           font-weight: bold;
+           border-radius:5px;
+       }
+       .container-detail{
+           
+           margin-left: 4.5rem;
+           margin-top: 3rem;
+           margin-right:3.8rem;
+           padding:10px;
+           background-color: white;
+       }
+       .container-detail th,td{
+           padding:10px;
+
+       }
+       .container-detail table,td,th{
+            border:1px solid rgb(166, 241, 166);
+       }
+       .container-detail table{
+           width: 50%;
+           border-collapse: collapse;
+           box-shadow: 3px 3px 3px 0px rgb(219, 238, 204,0.8);
+       }
+       .container-detail tr:nth-child(even) {
+           background-color: #e3fad1;
+        }
+        .container-detail-content{
+            margin-left: 4.5rem;
+            margin-top: 3rem;
+            margin-right:3.8rem;
+            background-color: white;
+            padding: 15px;
+        }
+        .container-kind-same{
+            margin-left: 4.5rem;
+            margin-top: 3rem;
+            margin-right:3.8rem;
+            background-color: white;
+            padding: 15px;  
+        }
+        #container-kind-same{
+            color:green;
+            padding-right: 10px;
+        }
+        
+        .container-kind-same-img img{
+            position: relative;
+            box-shadow: 0px 2px 10px 1px rgba(41, 40, 40, 0.4); 
+            z-index: 1;
+            height: 230px;
+        }
+        .container-kind-same-discount{
+            position: absolute;
+            background-color:red;
+            color:white;
+            padding:10px 5px;
+            border-radius:50%;
+            z-index: 2;
+            opacity:0.7;
+            top: 0.3rem;
+            left: 3rem;
+        }
+        .container-kind-same-price-entry{
+            text-decoration: line-through;
+            color:rgb(143, 134, 134);
+            font-size: 15px;
+        }
+        .container-kind-same-price-present{
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            padding-left:10px;
+        }
+        .container-kind-same-content{
+            margin-left: 10px;
+            margin-right: 10px;
+            border:1px solid white;
+        }
+        .container-kind-same-content:hover{
+            border:1px solid green;
+        }
+        .pricediscount{
+            border:none;
+            width: 140px;
+            text-align: center;
+            font-weight: bold;
+            font-size:24px;
+            margin-top:-5px ;
+        }
+        .dpricediscount{
+            text-align: center;
+            font-weight: bold;
+            font-size:24px;
+            margin-top:-5px ;
+        }
+      

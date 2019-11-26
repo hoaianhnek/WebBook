@@ -1,0 +1,213 @@
+.limiter {
+width: 100%;
+margin: 0 auto;
+}
+#button {
+outline: none;
+border: none;
+margin-top:10px;
+}
+.input{
+  outline: none;
+  border: none;
+}
+.container-login {
+width: 100%;  
+min-height: 50vh;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+padding: 15px;
+background-position: center;
+position: relative;
+z-index: 1;  
+}
+.wrap-login {
+width: 390px;
+border-radius: 10px;
+overflow: hidden;
+background: transparent;
+}
+.login-form {
+width: 100%;
+border-radius: 10px;
+background-color: #fff;
+}
+.login-form-logo {
+font-size: 60px; 
+color: #333333;
+display: flex;
+justify-content: center;
+align-items: center;
+width: 120px;
+height: 120px;
+border-radius: 50%;
+background-color: #fff;
+margin: 0 auto;
+}
+
+.login-form-title {
+font-size: 28px;
+color: #fff;
+line-height: 1.2;
+text-align: center;
+text-transform: uppercase;
+display: block;
+}
+
+.wrap-input {
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 29px 0;
+}
+
+.input {
+  font-family: Ubuntu-Regular;
+  font-size: 20px;
+  color: #555555;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  padding: 0 10px 0 80px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+/*---------------------------------------------*/ 
+.focus-input {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.focus-input::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  background: #d41872;
+  background: -webkit-linear-gradient(left, #a445b2, #d41872, #fa4299);
+  background: -o-linear-gradient(left, #a445b2, #d41872, #fa4299);
+  background: -moz-linear-gradient(left, #a445b2, #d41872, #fa4299);
+  background: linear-gradient(left, #a445b2, #d41872, #fa4299);
+}
+
+.focus-input::after {
+  font-family: Linearicons-Free;
+  font-size: 18px;
+  color: #999999;
+
+  content: attr(data-placeholder);
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 40px;
+  left: 35px;
+
+  transition: all 0.4s;
+}
+
+.input:focus {
+  padding-left: 60px;
+}
+
+.input:focus + .focus-input::after {
+  left: 23px;
+  color: #d41872;
+}
+
+.input:focus + .focus-input::before {
+  width: 100%;
+}
+
+.has-val.input + .focus-input::after {
+  left: 23px;
+  color: #d41872;
+}
+
+.has-val.input + .focus-input::before {
+  width: 100%;
+}
+
+.has-val.input {
+  padding-left: 60px;
+}
+
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login-form-btn {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.login-form-btn {
+  font-family: Ubuntu-Bold;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 160px;
+  height: 42px;
+  border-radius: 21px;
+
+  background: #d41872;
+  background: linear-gradient(left, #a445b2, #d41872, #fa4299);
+  position: relative;
+  z-index: 1;
+
+  transition: all 0.4s;
+}
+
+.login-form-btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: 21px;
+  background-color: #555555;
+  top: 0;
+  left: 0;
+  opacity: 0;
+
+  transition: all 0.4s;
+}
+
+.login-form-btn:hover {
+  background-color: transparent;
+}
+.login-or{
+    padding: 10px;
+    border-radius: 50%;
+    border:1px solid green;
+    background: rgb(78, 196, 78);
+}

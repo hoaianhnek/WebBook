@@ -1,0 +1,54 @@
+        .container-category{
+            margin:0 3.8rem 0 4.5rem;
+            background-color: white;
+            padding:15px;
+       }
+       .container-category-img img{
+            position: relative;
+            box-shadow: 0px 2px 10px 1px rgba(41, 40, 40, 0.4); 
+            z-index: 1;
+            height: 230px;
+        }
+       .container-category-discount{
+            position: absolute;
+            background-color:red;
+            color:white;
+            border-radius: 50%;
+            z-index: 2;
+            opacity:0.7;
+            top: 0.3rem;
+            left: 3rem;
+            padding: 10px 5px;
+       }
+       .container-category-price-entry{
+            text-decoration: line-through;
+            color:rgb(143, 134, 134);
+            font-size: 15px;
+       }
+       .container-category-price-present{
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            padding-left:10px;
+       }
+       .container-category-content{
+            box-sizing: border-box;
+            margin-left: 10px;
+            margin-right: 10px;
+            border:1px solid white;
+       }
+       .container-category-content:hover{
+            border:1px solid green;
+        }
+        .type{
+            color:black;
+            font-size: 20px;
+        }
+        .type:hover{
+            color:green;
+        }
+        .container-category-price-entry-notdiscount{
+            color: red;
+            font-weight: bold;
+            font-size: 20px;
+       }
