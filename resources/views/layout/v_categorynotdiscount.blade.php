@@ -10,7 +10,7 @@
                 <div class="text-center container-category-content">
                     <div class="container-category-img p-4">
                         <a href="master-{{$Book->id_Book}}">
-                            <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}">
+                            <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}" width="190px">
                         </a>
                     </div>
                     <div class="text-centers">

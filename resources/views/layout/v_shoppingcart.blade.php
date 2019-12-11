@@ -16,7 +16,7 @@
         @foreach($content as $Book)
         <div class="d-flex justify-content-between container-cart-product-item">
             <div class="d-flex"> 
-                <img src="../image/{{$Book->options->image}}" alt="{{$Book->name}}">
+                <img src="../image/{{$Book->options->image}}" style="width: 120px;  alt="{{$Book->name}}">
                 <div class="ml-4">
                     <a href="#" class="container-cart-product-item-name text-decoration-none"> {{$Book->name}} </a>
                     <p>- Tác giả: {{$Book->options->author}}</p>
@@ -39,7 +39,7 @@
                     <?php
                     $subtotal = $Book->price * $Book->qty;
                     echo $subtotal;
-                    ?>
+                    ?> đ
                 </div>
             </div>         
         </div>
@@ -48,29 +48,37 @@
         <div>
             <div class="d-flex justify-content-end pr-5">
                 <span class="mr-5">Số tiền</span>
-                <span class="ml-5">{{Cart::subtotal()}}</span>
+                <span class="ml-5">{{Cart::subtotal()}} đ</span>
             </div>
+            @foreach($customer as $cus)
             <div class="d-flex justify-content-end pr-5">
                 <span class="mr-5">Phí vận chuyển</span>
                 <span class="ml-5">
-                    <?php
-                    $tax = $Book->price;
-                    echo $tax;
-                    ?>
+                    <?php $tax = 0;?>
+                    @if($cus->id_Ship != null)
+                        <?php
+                        $tax = $cus->charges;
+                        echo $tax;
+                        ?>
+                    @else
+                    {{$tax}}
+                    @endif
+                    đ
                 </span>
             </div>
+            @endforeach
         </div>
         
         <hr>
         <div class="d-flex justify-content-end container-cart-product-pay pr-5">
             <span class="mr-4">THANH TOÁN</span>
-            <span class="ml-4">{{Cart::total()+$tax = $Book->price}}</span>
+            <span class="ml-4">{{Cart::total()+$tax}} đ</span>
         </div><!-- +$tax = $Book->price -->
         <div class="d-flex justify-content-end pt-3 pr-5">
-            <button class="mr-4" id="next-purchase">Tiếp tục mua hàng
+            <a class="mr-4 text-decoration-none text-dark" id="next-purchase" href="master-home">Tiếp tục mua hàng
                 <i class="fas fa-cart-plus pr-2"></i>
-            </button>
-            <a id="pay" href="login-checkout" class="text-decoration-none">Thanh toán
+            </a>
+            <a id="pay" href="checkout-view" class="text-decoration-none">Thanh toán
                 <i class="fas fa-chevron-circle-right pr-2"></i>
             </a>
         </div>

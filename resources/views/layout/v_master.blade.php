@@ -6,7 +6,7 @@
     <title>BOOK STORE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 
@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/body_search.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/body_shopping.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/header_connect.css">
     <script src="https://kit.fontawesome.com/6e4540c13e.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -42,10 +43,17 @@
             <div class="cart-menu">
                 <a href="showcart"><img src="../image/giohang.gif" alt="Giỏ hàng" class="cart"></a>
             </div>
+            @if(Auth::check())
+            <a class="d-flex myself text-decoration-none" href="logout">
+                <i class="fas fa-users myself-icon"></i>
+                <span>Logout</span>
+            </a>
+            @else
             <div class="d-flex login-logout">
                 <a href="login" class="border-right text-decoration-none">Đăng Nhập</a>
                 <a href="login" class="text-decoration-none" onclick="displaySingupBox()">Đăng Ký</a>
             </div>
+            @endif
         </div>
         <div class="d-flex justify-content-between color-menu">
             <div class="menu-dropdown dropdown">
@@ -85,6 +93,8 @@
     @yield('body_shopping')
     @yield('body_login')
     @yield('body_search')
+    @yield('body_checkout')
+    @yield('alart_success')
 
     @include('layout.v_footer')
 </body>

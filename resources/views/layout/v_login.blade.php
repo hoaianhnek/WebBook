@@ -1,17 +1,19 @@
 @extends('layout.v_master')
 @section('body_login')
-
+@if(session('logincart'))
+    <section class="alert alert-warning text-center">{{session('logincart')}}</section>
+@endif
 <div class="container-login d-flex">
 	<div class="wrap-login m-5">
 		<span class="login-form-title p-b-41">
 			Account Login
 		</span>
-		<form class="login-form validate-form p-b-33 p-t-5" action="register" method="POST">
+		<form class="login-form validate-form p-b-33 p-t-5" action="login" method="POST">
 			{{ csrf_field()}}
-			@if($errors->has('errorlogin'))
+			@if($errors->has('error'))
 				<div class="alert alert-danger">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					{{$errors->first('errorlogin')}}
+					{{$errors->first('error')}}
 				</div>
 			@endif
 			<div class="wrap-input validate-input" data-validate = "Enter email">
@@ -43,7 +45,7 @@
 		<span class="login-form-title p-b-41">
 			Register
 		</span>
-		<form class="login-form validate-form p-b-33 p-t-5" action="add-customer" method="POST">
+		<form class="login-form validate-form p-b-33 p-t-5" action="register" method="POST">
 			{{csrf_field()}}
 			<div class="wrap-input validate-input" data-validate = "Enter name">
 				<input class="input input" id="textarea" type="text" name="name" placeholder="anh">
@@ -56,7 +58,7 @@
 			</div>
 
 			<div class="wrap-input validate-input" data-validate="Enter password">
-				<input class="input input" type="password" name="pass" placeholder="1234">
+				<input class="input input" type="password" name="password" placeholder="1234">
 				<span class="focus-input" data-placeholder="&#xe80f;"></span>
 			</div>
 

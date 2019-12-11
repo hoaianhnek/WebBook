@@ -196,3 +196,7 @@
             color: white;
             background-color: #52FAB5;
         }
+        .cart-btn{
+            border:none;
+            background-color: white;
+        }

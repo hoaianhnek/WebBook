@@ -14,6 +14,15 @@ session_start();
 
 class CheckoutController extends Controller
 {
+
+//kiểm tra nếu chưa đăng nhập sẽ tự động chuyển sang trang đăng nhập
+    public function __construct() {
+    $this->middleware('auth');
+    }
+
+
+    
+
     public function login_checkout(){
      //    $arrType = category::all();
      // return view('layout.v_login',compact('arrType'));

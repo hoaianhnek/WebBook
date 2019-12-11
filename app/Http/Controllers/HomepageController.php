@@ -30,13 +30,18 @@ class HomepageController extends Controller
             ->groupBy('id_Book')->havingRaw('sum(amount_Order)>1')->get();
 
             foreach ($arrIDBooksell as $IDBook) {
-                $ID[]=$IDBook->id_Book;
+                $ID=$IDBook->id_Book;
             }
-            $arrBookBetseller =  book::join('discount','discount.id_Discount','book.id_Discount')
-            ->where('id_Book',$ID)->paginate(4);
+            
         if($body == 'home')
         {
-            return view('layout.v_body_home',compact('arrType','arrBookDiscount','arrBookBetseller'));
+            if(isset($ID))
+            {
+                $arrBookBetseller =  book::join('discount','discount.id_Discount','book.id_Discount')
+                ->where('id_Book',$ID)->paginate(4);
+                return view('layout.v_body_home',compact('arrType','arrBookDiscount','arrBookBetseller'));
+            }
+            return view('layout.v_body_home',compact('arrType','arrBookDiscount'));
         }
         else
         {

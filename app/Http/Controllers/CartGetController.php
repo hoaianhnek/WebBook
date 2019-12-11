@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Request;
 use Cart;
 use App\category;
+use App\customer;
+use Illuminate\Support\Facades\Auth;
 
 class CartGetController extends Controller
 {
@@ -28,8 +30,12 @@ class CartGetController extends Controller
        	$cart = Cart::content();
         $this->data['cart'] = $cart;
 		
+    $id_Us = Auth::user()->id;
+        $customer = customer::join('users','customer.id_Us','=','users.id')
+        ->join('shipping_charges','shipping_charges.id_ship','=','customer.id_Ship')
+        ->where('customer.id_Us',$id_Us)->get();
 		$arrType = category::all();
-		return view('layout.v_shoppingcart',compact('arrType'));
+		return view('layout.v_shoppingcart',compact('arrType','customer'));
    
     }
 }

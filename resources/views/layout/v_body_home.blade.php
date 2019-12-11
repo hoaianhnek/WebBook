@@ -44,12 +44,12 @@
                 <div class="col-3">
                     <div class="background-book-sell" data-toggle="collapse">
                         <div class="overlay">
-                            <div class="text"><a href=""><i class="fas fa-shopping-cart"></i></a></div>
+                            <div class="text"><a href="login"><i class="fas fa-shopping-cart"></i></a></div>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="book-sell-img">
                                 <a href="master-{{$Book->id_Book}}" class="book-sell-top">
-                                    <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}">
+                                    <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}" height="170px">
                                     <div class="discount">-{{$Book->number_Discount}}%</div>   
                                 </a>
                             </div>
@@ -73,6 +73,7 @@
     </div>
 </div>
         <!-- sách bán chạy -->
+@if(isset($arrBookBetseller))
 <div class="book-new">
     <div class="d-flex justify-content-between">SÁCH BÁN CHẠY</div>
     <hr>
@@ -87,7 +88,7 @@
                 <div class="d-flex justify-content-between">
                     <div class="book-sell-img">
                         <a href="master-{{$Book->id_Book}}" class="book-sell-top">
-                            <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}">
+                            <img src="../image/{{$Book->image_Book}}" height="170px" alt="{{$Book->name_Book}}">
                             <div class="discount">-{{$Book->number_Discount}}%</div>   
                         </a>  
                     </div>
@@ -109,4 +110,5 @@
     </div>
     {{$arrBookBetseller->links()}}
 </div>
+@endif
 @stop
