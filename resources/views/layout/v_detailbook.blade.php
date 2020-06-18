@@ -31,8 +31,9 @@
                         </div>
                         <input type="submit" value="Mua Ngay" class="container-product-content-cart mr-4">
                         <input type="hidden" name = "bookid_hidden" value="{{$Book->id_Book}}">
+                        <a href="cart-add-{{$Book->id_Book}}"><input type="button" name = "" value="Thêm Vào Giỏ Hàng" class="container-product-content-add-cart"></a>
                     </form>
-                    <input type="submit" name = "addcart" value="Thêm Vào Giỏ Hàng" class="container-product-content-add-cart">
+                    
                     
                     <div class="container-product-content-warning">
                         <i class="fas fa-exclamation-circle"></i>
@@ -53,10 +54,6 @@
             <tr>
                 <th>Tên sách</th>
                 <td>{{$Book->name_Book}}</th>
-            </tr>
-            <tr>
-                <th>Tên nhà cung cấp</th>
-                <td>{{$Book->supplier_Book}}</th>
             </tr>
             <tr>
                 <th>Tác giả</th>
@@ -82,12 +79,14 @@
         </div>
         <hr>
         <div class="row p-4">
+            @if(isset($arrBookTypeDis))
             @foreach($arrBookTypeDis as $Book)
             <div class="col-3">
                 <div class="text-center container-kind-same-content">
                     <div class="container-kind-same-img p-4">
                         <a href="master-{{$Book->id_Book}}" class="container-kind-same-top">
-                            <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}">
+                            <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}"
+                            width="160px">
                             <div class="container-kind-same-discount">-{{$Book->number_Discount}}%</div>
                         </a>
                     </div>
@@ -99,8 +98,7 @@
                 </div>
             </div>
             @endforeach
-    	</div> 
-        {{ $arrBookTypeDis->links()}}    
+            @endif
     </div>
 </div>
 @stop

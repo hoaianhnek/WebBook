@@ -1,55 +1,57 @@
-        .header-footer{
-            background-color:green;
-            margin-top:3rem;
-            padding:50px;
-            color:white;
-        }
-       .chiso{
-           margin-bottom:1px;
-       }
-       .body-footer{
-           background-color: white;
-           margin-top:3rem;
-       }
-       .body-footer-customer{
-           margin-left:6rem;
-       }
-       .body-footer .list-unstyled a{
-           color:black;
-       }
-       .body-footer-icon{
-           border-radius:50%;
-           padding:5px 8px;
-           background-color: blue;
-       }
-       .fb{
-          background-color: blue;
-          box-shadow: 0px 3px 10px rgba(0,0,0,.25);
-          text-align: center;
-          display: inline-block;
-          text-align: center;
-          vertical-align: middle;
-          padding: 5px 11px;
-       }
-       .ins{
-            display: inline-block;
-            text-align: center;
-            border-radius: 40px;
-            color: #fff;
-            vertical-align: middle;
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-            box-shadow: 0px 3px 10px rgba(0,0,0,.25);
-       }
-       .youtu{
-            background-color: red;
-            box-shadow: 0px 3px 10px rgba(0,0,0,.25);
-            text-align: center;
-            display: inline-block;
-            vertical-align: middle;
-       }
-       .body-footer-icon i{
-           color:white;
-       }
-       #dichvu:hover{
-           color:green;
-       }
+  .header-footer{
+      background-color:green;
+      margin-top:3rem;
+      padding:50px;
+      color:white;
+  }
+ .chiso{
+     margin-bottom:1px;
+ }
+ .body-footer{
+     background-color: white;
+     margin-top:3rem;
+ }
+ .body-footer-customer{
+     margin-left:6rem;
+ }
+ .body-footer .list-unstyled a{
+     color:black;
+ }
+ .body-footer-icon{
+     border-radius:50%;
+     padding:5px 8px;
+     background-color: blue;
+ }
+ .fb{
+    background-color: blue;
+    box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+    text-align: center;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 11px;
+ }
+ .ins{
+      display: inline-block;
+      text-align: center;
+      border-radius: 40px;
+      color: #fff;
+      vertical-align: middle;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+      box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+ }
+ .youtu{
+      background-color: red;
+      box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+ }
+ .body-footer-icon i{
+     color:white;
+ }
+ #dichvu:hover{
+     color:green;
+ }
+
+ 

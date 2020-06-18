@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use App\category;
 use App\User;
 use App\customer;
+use App\book;
+use App\discount;
+use App\users;
+use Cart;
 use Session;
 
 class LoginController extends Controller
@@ -29,17 +33,47 @@ class LoginController extends Controller
      * @return void
      */
     
-    public function index(){
+    public function index($idBook){
         if(Auth::check()){
-            $id_Us = Auth::user()->id;
-            $customer = customer::join('users','customer.id_Us','=','users.id')
-            ->join('shipping_charges','shipping_charges.id_ship','=','customer.id_Ship')
-            ->where('customer.id_Us',$id_Us)->get();
-            $arrType = category::all();
-            return view('layout.v_shoppingcart',compact('arrType','customer'));
+            $book = book::where('id_Book',$idBook)->first();
+            if($book->id_Discount != NULL)
+            {   
+                $BookDis = book::where('id_Book',$idBook)
+                ->join('discount','discount.id_Discount','=','book.id_Discount')
+                ->first();
+                $arrType = category::all();
+                $data['id'] = $idBook;
+                $data['qty'] = '1';
+                $data['name'] = $BookDis->name_Book;
+                $data['price'] = $BookDis->price_Book - $BookDis->price_Book*$BookDis->number_Discount/100;
+                $data['weight'] = '123';
+                $data['options']['image'] = $BookDis ->image_Book;
+                $data['options']['author'] = $BookDis ->author_Book;
+                Cart::add($data);
+                $arrType = category::all();
+                $addCart = 'Sách đã được thêm vào giỏ hàng';
+                return redirect('bookstore/master-home')->with('addCart',$addCart);
+            }else{
+                $BookDis = book::where('id_Book',$idBook)
+                ->first();
+                $arrType = category::all();
+                $data['id'] = $idBook;
+                $data['qty'] = '1';
+                $data['name'] = $BookDis->name_Book;
+                $data['price'] = $BookDis->price_Book;
+                $data['weight'] = '123';
+                $data['options']['image'] = $BookDis ->image_Book;
+                $data['options']['author'] = $BookDis ->author_Book;
+                Cart::add($data);
+                $arrType = category::all();
+                $addCart = 'Sách đã được thêm vào giỏ hàng';
+                return redirect('bookstore/master-home')->with('addCart',$addCart);
+            }
+
         }else{
             $arrType = category::all();
-            return view('layout.v_login',compact('arrType'));
+            $cartlogin = 'Đăng nhập để mua sách!';
+            return view('layout.v_login',compact('arrType','cartlogin'));
         }
     }
     public function getLogin() {
@@ -51,12 +85,12 @@ class LoginController extends Controller
         // Kiểm tra dữ liệu nhập vào
 
         $rules = [
-            'email' =>'required|email',
+            'email1' =>'required|email',
             'password' => 'required|min:4'
         ];
         $messages = [
-            'email.required' => 'Email là trường bắt buộc',
-            'email.email' => 'Email không đúng định dạng',
+            'email1.required' => 'Email là trường bắt buộc',
+            'email1.email' => 'Email không đúng định dạng',
             'password.required' => 'Mật khẩu là trường bắt buộc',
             'password.min' => 'Mật khẩu phải chứa ít nhất 4 ký tự',
         ];
@@ -70,33 +104,61 @@ class LoginController extends Controller
 
         // Nếu dữ liệu hợp lệ sẽ kiểm tra trong csdl
 
-        $adminInfo = array('email' => $request->email, 'password' => $request->password);
+        $adminInfo = array('email' => $request->email1, 'password' => $request->password);
         if(Auth::attempt($adminInfo)) {
             // Kiểm tra đúng email và mật khẩu sẽ chuyển trang
             return redirect('bookstore/master-home');
         } else {
-            echo $email = $request->input('email');
-            print_r($adminInfo);
             // Kiểm tra không đúng sẽ hiển thị thông báo lỗi
-            Session::flash('error', 'Email hoặc mật khẩu không đúng!');
-            // return redirect('bookstore/login');
+            $loi = 'Email hoặc mật khẩu không đúng!';
+            $arrType = category::where('status_Category','=','true')->get();
+            return view('layout.v_login',compact('arrType','loi'));
             }
         }
     }
 
     public function register(Request $request)
 {
-    $input=$request->all();
-    $password=bcrypt($input['password']);
-    $data['name'] = $request ->name;
-    $data['email'] = $request ->email;
-    $data['password'] = bcrypt($input['password']);
-    $insert= User::create($data);
-    customer::insert([
-        'id_Us' => $insert->id
-    ]);
+    $rules = [
+            'name1' =>'required',
+            'email' => 'required|email|unique:users',
+            'password1' => 'required|min:4'
+        ];
+        $messages = [
+            'email.required' => 'Email là trường bắt buộc',
+            'email.email' => 'Email không đúng định dạng',
+            'password1.required' => 'Mật khẩu là trường bắt buộc',
+            'password1.min' => 'Mật khẩu phải chứa ít nhất 4 ký tự',
+            'name1.required' => 'Họ tên không được để trống',
+            'email.unique' => 'Email đã tồn tại',
+        ];
+        
+        $validator = Validator::make($request->all(), $rules, $messages);
 
-    return redirect('bookstore/login');
+        if ($validator->fails()) {
+        // Điều kiện dữ liệu không hợp lệ sẽ chuyển về trang đăng nhập và thông báo lỗi
+        return redirect('bookstore/login')->withErrors($validator)->withInput();
+        }else {
+
+        $input=$request->all();
+        $password=bcrypt($input['password1']);
+        $data['name'] = $request ->name1;
+        $data['email'] = $request ->email;
+        $data['password'] = bcrypt($input['password1']);
+        $insert= User::create($data);
+        customer::insert([
+            'id_Us' => $insert->id,
+            'status_Customer' => 'true'
+        ]);
+        users::where('id',$insert->id)->update([
+            'role' => 3
+        ]);
+        $arrType = category::where('status_Category','=','true')->get();
+        $thongbao = 'Bạn đã đăng ký thành công!';
+        return view('layout.v_login',compact('arrType','thongbao'));
+        
+        }
+    
 }
 
     public function getLogout(){

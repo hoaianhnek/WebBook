@@ -27,7 +27,7 @@
                         <div class="form-group col-md-6">
                             <div class="form-group col-md-7">
                                 <label class="font-weight-bold">Hình ảnh</label>
-                                <input type="file" class="form-control" name="image" id="image">
+                                <input type="file" class="form-control hinhanhsach" name="image" id="image">
                             </div>
                             <div class="form-group col-md-5">
                                 
@@ -39,8 +39,8 @@
                         <div class="form-group col-md-6">
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label class="font-weight-bold">Thể loại</label>
-                                    <select class="input-sm form-control w-sm inline v-middle" name="category">
+                                    <label class="font-weight-bold">Thể loại</label><br>
+                                    <select class="input-sm form-control w-sm inline v-middle sach" name="category">
                                         <option value="{{$B->id_Category}}">{{$B->name_Category}}</option>
                                     @foreach($arrType as $Type)
                                         <option value="{{$Type->id_Category}}">{{$Type->name_Category}}</option>
@@ -50,15 +50,15 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label class="font-weight-bold">Khuyến mãi</label>
-                                    <select class="input-sm form-control w-sm inline v-middle" name="discount">
+                                    <label class="font-weight-bold">Khuyến mãi</label><br>
+                                    <select class="input-sm form-control w-sm inline v-middle sach" name="discount">
                                     @if(isset($B->id_Discount))
                                             <option value="{{$B->id_Discount}}">{{$B->name_Discount}}</option>
                                         @foreach($arrDis as $Dis)
                                             <option value="{{$Dis->id_Discount}}">{{$Dis->name_Discount}}</option>
                                         @endforeach
                                     @else
-                                        <option value="0">--Chọn khuyến mãi--</option>
+                                        <option value="">--Chọn khuyến mãi--</option>
                                         @foreach($arrDis as $Dis)
                                             <option value="{{$Dis->id_Discount}}">{{$Dis->name_Discount}}</option>
                                         @endforeach
@@ -69,7 +69,7 @@
                             <div class="form-row">
                                <div class="form-group col-md-12">
                                     <label class="font-weight-bold">Giá</label>
-                                    <input type="text" class="form-control" name="price" value="{{$B->price_Book}}">
+                                    <input type="text" class="form-control giasach" name="price" value="{{$B->price_Book}}">
                                 </div> 
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                         
                         <div class="form-group col-md-6">
                             <label class="font-weight-bold">Số lượng</label>
-                            <input type="text" class="form-control" name="amount" value="{{$B->amount_Book}}">
+                            <input type="text" class="form-control" name="amount" value="{{$B->amount_Book}}" disabled="true">
                         </div>
                         <div class="form-group col-md-6">
                             <label class="font-weight-bold">Nhà sản xuất</label>

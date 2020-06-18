@@ -9,35 +9,30 @@
                 Sửa Khuyến Mãi
                 </div>
                 
-                <form action="" method="">
-                    <!-- {{ csrf_field() }} -->
+                <form action="discount-edit-{{$discount->id_Discount}}" method="POST">
+                    {{ csrf_field() }}
                     <div class="form-row"> 
                         <div class="form-group col-md-6">
-                            <label class="font-weight-bold">Tên khách hàng</label>
-                            <input type="text" class="form-control" name="name" value="">
+                            <label class="font-weight-bold">Tên khuyến mãi</label>
+                            <input type="text" class="form-control" name="name_Discount" value="{{$discount->name_Discount}}">
                         </div> 
                         <div class="form-group col-md-6">
-                            <label class="font-weight-bold">Email</label>
-                            <input type="text" class="form-control" name="email" value="">
+                            <label class="font-weight-bold">Ngày bắt đầu</label>
+                            <input type="date" class="form-control" name="date_start" value="{{$discount->date_start}}">
                         </div>   
                     </div>  
                     
                     <div class="form-row">
                      
-                        <div class="form-group col-md-12">
-                            <label class="font-weight-bold">Địa chỉ</label>
-                            <select class="input-sm form-control w-sm inline v-middle" name="country">
-                                <option value=""></option>
-                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="font-weight-bold">SĐT</label>
-                            <input type="text" class="form-control" name="phone" value="">
+                            <label class="font-weight-bold">Ngày kết thúc</label>
+                            <input type="date" class="form-control" name="date_end" value="{{$discount->date_end}}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="font-weight-bold">Mức khuyến mãi</label>
+                            <input type="text" class="form-control" name="number_Discount" value="{{$discount->number_Discount}}">
                         </div> 
-                     </div>
+                    </div>
                     <div class="modal-footer" >
                         <!-- <button type="submit" name="submit-cancel" class="btn btn-danger">Cancel</button> -->
                         <button type="submit" name="submit-save" class="btn btn-success">Save</button>

@@ -14,18 +14,30 @@
             {{csrf_field()}}
             <div class="col-sm-2">
               <input type="text" class="input-sm form-control" placeholder="ID thể loại" name="id_Category">
+              @if($errors->has('id_Category'))
+                <p style="color:red">{{$errors->first('id_Category')}}</p>
+              @endif
             </div>
             <div class="col-sm-4">
               
                 <div class="input-group">
                     <input type="text" class="input-sm form-control" placeholder="Tên thể loại" name="name_Category">
+                    @if($errors->has('name_Category'))
+                      <p style="color:red">{{$errors->first('name_Category')}}</p>
+                    @endif
                     <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="submit">Thêm</button>
+                        <button class="btn btn-sm btn-default" id="add"type="submit">Thêm</button>
                     </span>
                 </div>
             </div>
         </form>
+        
+      
+    
       </div>
+      @if(isset($message))
+      <section class="alert alert-success text-center">{{$message}}</section>
+      @endif
         <div class="table-responsive">
             <table class="table table-striped b-t b-light">
                 <thead>

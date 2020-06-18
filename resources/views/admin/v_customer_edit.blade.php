@@ -23,14 +23,21 @@
                     </div>  
                     
                     <div class="form-row">
-                     
-                        <div class="form-group col-md-12">
-                            <label class="font-weight-bold">Địa chỉ</label>
-                            <select class="input-sm form-control w-sm inline v-middle" name="country">
-                                <option value="{{$cus->id_Ship}}">{{$cus->country}}</option>
-                                @foreach($arrShip as $ship)
-                                <option value="{{$ship->id_Ship}}">{{$ship->country}}</option>
-                                @endforeach
+                        
+                        <div class="form-group col-md-6">
+                            <label class="font-weight-bold">Tỉnh/ thành phố</label><br>
+                            <select class="input-sm form-control w-sm inline v-middle thanhphokhachhang" name="country">
+                                @if(isset($cus->id_Ship))
+                                    <option value="{{$cus->id_Ship}}">{{$cus->country}}</option>
+                                    @foreach($arrShip as $ship)
+                                    <option value="{{$ship->id_Ship}}">{{$ship->country}}</option>
+                                    @endforeach
+                                @else
+                                    <option>--Chọn thành phố/ tỉnh--</option>
+                                    @foreach($arrship as $ship)
+                                    <option value="{{$ship->id_Ship}}">{{$ship->country}}</option>
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -39,6 +46,10 @@
                             <label class="font-weight-bold">SĐT</label>
                             <input type="text" class="form-control" name="phone" value="{{$cus->phone_Cus}}">
                         </div> 
+                        <div class="form-group col-md-6">
+                            <label class="font-weight-bold">Địa chỉ</label>
+                            <input type="text" class="form-control" name="addr" value="{{$cus->add_Cus}}">
+                        </div>  
                      </div>
                     <div class="modal-footer" >
                         <!-- <button type="submit" name="submit-cancel" class="btn btn-danger">Cancel</button> -->

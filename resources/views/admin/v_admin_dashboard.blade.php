@@ -26,7 +26,7 @@
     <header class="header fixed-top clearfix">
     <!--logo start-->
     <div class="brand">
-        <a href="index.html" class="logo">
+        <a href="dashboard" class="logo">
             Admin
         </a>
         <div class="sidebar-toggle-box">
@@ -36,9 +36,9 @@
     <div class="top-nav clearfix">
         <!--search & user info start-->
         <ul class="nav pull-right top-menu">
-            <li>
+            <!-- <li>
                 <input type="text" class="form-control search" placeholder=" Search">
-            </li>
+            </li> -->
             <!-- user login dropdown start-->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -49,7 +49,7 @@
                 <ul class="dropdown-menu extended logout">
                     <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                    <li><a href="#"><i class="fa fa-key"></i> Đăng xuất </a></li>
+                    <li><a href="logout"><i class="fa fa-key"></i> Đăng xuất </a></li>
                 </ul>
             </li>
             <!-- user login dropdown end -->
@@ -65,17 +65,20 @@
             <div class="leftside-navigation">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <li>
-                        <a class="active" href="index.html">
+                        <a class="active" href="dashboard">
                             <i class="fa fa-dashboard"></i>
                             <span>Tổng quan</span>
                         </a>
                     </li>
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                     <li>
                         <a href="{{URL::to('admin/category-view')}}">
                             <i class="fa fa-bookmark"></i>
                             <span>Danh sách thể loại</span>
                         </a>                            
                     </li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-book"></i>
@@ -86,6 +89,8 @@
                             <li><a href="{{URL::to('admin/add-book')}}">Thêm sách</a></li>
                         </ul>
                     </li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-user"></i>
@@ -96,12 +101,16 @@
                             <li><a href="{{URL::to('admin/customer-view-add')}}">Thêm khách hàng</a></li>
                         </ul>
                     </li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                     <li>
                         <a href="ship-view">  
                             <i class="fa fa-ship"></i>
                             <span>Phí Ship </span>
                         </a>
                     </li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-eye"></i>
@@ -112,42 +121,35 @@
                             <li><a href="discount-add-view">Thêm khuyến mãi</a></li>
                         </ul>
                     </li>
+                    @endif
+                    @if(Auth::user()->role == 1)
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class=" fa fa-user"></i>
                             <span>Quản lý nhân viên</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="#">Danh sách nhân viên</a></li>
-                            <li><a href="#">Thêm nhân viên</a></li>
+                            <li><a href="employ-show">Danh sách nhân viên</a></li>
+                            <li><a href="show-employ-add">Thêm nhân viên</a></li>
                         </ul>
                     </li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                     <li class="sub-menu">
                         <a href="order-view">
                             <i class=" fa fa-first-order"></i>
                             <span>Quản lý hóa đơn</span>
                         </a>
                     </li>
+                    @endif
+                    @if(Auth::user()->role == 1)
                     <li class="sub-menu">
-                        <a href="javascript:;">
+                        <a href="report-month">
                             <i class="fa fa-glass"></i>
                             <span>Báo cáo doanh thu</span>
                         </a>
-                        <ul class="sub">
-                            <li><a href="#">Doanh thu theo tháng</a></li>
-                            <li><a href="#">Doanh thu theo năm</a></li>
-                        </ul>
                     </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span>Quản lý nhập sách</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a href="#">Danh sách phiếu nhập</a></li>
-                            <li><a href="#">Thêm phiếu nhập</a></li>
-                        </ul>
-                    </li>
+                    @endif
                 </ul>            </div>
             <!-- sidebar menu end-->
         </div>
@@ -170,6 +172,10 @@
 @yield('discount_edit')
 @yield('order_show')
 @yield('order')
+@yield('body_report')
+@yield('employ_show')
+@yield('employ_add')
+@yield('employ_edit')
     <!-- footer -->
   	<div class="footer">
     	<div class="wthree-copyright">

@@ -9,17 +9,21 @@
       QUẢN LÝ HÓA ĐƠN
         </div>
         <div class="row w3-res-tb"> 
-            <div class="col-sm-5 m-b-xs">          
+            <div class="col-sm-5 m-b-xs">  
+        <form action="order-filter" method="POST">
+            {{csrf_field()}}
+            <select class="input-sm form-control w-sm inline v-middle" name="status" id="year"> 
+                <option value="Chưa giao">Chưa giao</option>
+                <option value="Đã giao">Đã giao</option>
+            </select>
+            <button class="btn btn-sm btn-default" name="submit-filter" type="submit">Apply</button> 
+            <button class="btn btn-sm btn-default" type="submit">Show All</button>   
+        </form>         
                 </div>
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-3">
-                <div class="input-group">
-                    <input type="text" class="input-sm form-control" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
-                    </span>
-                </div>
+                
             </div>
         </div>
         <div class="table-responsive">
@@ -59,7 +63,24 @@
                                     <td>Số lượng</td>
                                     <td>Giá</td>
                                 </tr>
-                                @foreach($arrDetail as $detail)
+                                @if(isset($arrBookDis))
+                                @foreach($arrBookDis as $detail)
+                                @if($detail->id_Order == $order->id_Order)
+                                <tr>
+                                
+                                    <td>{{$detail->name_Book}}</td>
+                                    <td>{{$detail->amount_Order}}</td>
+                                    <td>{{$detail->price_Book - $detail->price_Book*$detail->number_Discount/100}}đ</td>
+                                    <?php 
+                                        $sum += ($detail->price_Book - ($detail->price_Book*$detail->number_Discount)/100)*$detail->amount_Order;
+                                    ?>
+                                </tr>
+                                @endif
+                                @endforeach
+                                @endif
+
+                                @if(isset($arrBookNotDis))
+                                @foreach($arrBookNotDis as $detail)
                                 @if($detail->id_Order == $order->id_Order)
                                 <tr>
                                 
@@ -67,12 +88,31 @@
                                     <td>{{$detail->amount_Order}}</td>
                                     <td>{{$detail->price_Book}}đ</td>
                                     <?php 
-                                        $charges = $order->charges;
-                                        $sum += $detail->amount_Order * $detail->price_Book + $charges;
+                                        $sum += $detail->amount_Order * $detail->price_Book;
                                     ?>
                                 </tr>
                                 @endif
                                 @endforeach
+                                @endif
+                                
+                                @foreach($arrBook as $detail)
+                                @if($detail->id_Order == $order->id_Order)
+                                <tr>
+                                
+                                    <td>{{$detail->name_Book}}</td>
+                                    <td>{{$detail->amount_Order}}</td>
+                                    <td>{{$detail->price_Book}}đ</td>
+                                    <?php 
+                                        $sum += $detail->amount_Order * $detail->price_Book;
+                                    ?>
+                                </tr>
+                                @endif
+                                @endforeach
+                                <?php
+
+                                $charges = $order->charges;
+                                $sum += $charges;
+                                ?>
                             </tbody>
                         </table>
                   	</td>
@@ -98,8 +138,10 @@
             </tbody>
           </table>
         </div>
+        <footer class="panel-footer">
+          {{$arrOrder->links()}}
+          </footer>
         </div>
       </div>
   </section>
-
 @stop

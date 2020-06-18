@@ -14,12 +14,9 @@
           <div class="col-sm-4">
           </div>
           <div class="col-sm-3">
-            <div class="input-group">
-              <input type="text" class="input-sm form-control" placeholder="Search">
-              <span class="input-group-btn">
-              <button class="btn btn-sm btn-default" type="button">Go!</button>
-              </span>
-            </div>
+            <li style="list-style-type: none;">
+                <input type="text" class="form-control search"id="search" placeholder=" Search">
+            </li>
           </div>
         </div>
           <div class="table-responsive">
@@ -37,7 +34,7 @@
                   <tbody>
                         @foreach($arrDis as $dis)
                         <tr>
-                            <td>{{$dis->id_Discount}}</td>
+                            <td><div id="id_Discount">{{$dis->id_Discount}}</div></td>
                             <td>
                                 <span class="text-ellipsis">{{$dis->name_Discount}}</span>
                             </td>
@@ -70,5 +67,21 @@
         </div>
       </div>
   </section>
+<script type="text/javascript">
+       
+        $("#search").on('keyup',function(){
+          $search =  $(this).val();
+            $.ajax({
+                type:'get',
+                url:"{{URL::to('admin/loadDiscount')}}",
+                data:{'search':$search},
+                dataType:"text",//dữ liệu trả về
+                success:function(data){
+                    $('tbody').html(data); 
+                }
+            });
+        });
 
+$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
 @stop

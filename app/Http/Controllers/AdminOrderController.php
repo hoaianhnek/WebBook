@@ -7,25 +7,58 @@ use App\order;
 use App\detailorder;
 use App\customer;
 use App\book;
+use App\discount;
 use DB;
 use PDF;
+use Illuminate\Database\Eloquent\Collection;
 use App\shipping_charges;
 
 class AdminOrderController extends Controller
 {
     public function orderView(){
-    	$arrOrder = order::join('customer','customer.id_Cus','=','order.id_Cus')
-    	->join('users','users.id','=','customer.id_Us')
-    	->join('shipping_charges','shipping_charges.id_ship','=','customer.id_Ship')
-        ->orderBy('date_purchase','desc')->orderBy('id_Order','asc')
-    	->get();
+        $daynow = new \DateTime();
+        $arrOrder = order::join('customer','customer.id_Cus','=','order.id_Cus')
+        ->join('users','users.id','=','customer.id_Us')
+        ->join('shipping_charges','shipping_charges.id_ship','=','customer.id_Ship')
+        ->orderBy('date_purchase','desc')->orderBy('id_Order','desc')
+        ->paginate(10);
+
+        $arrDetail = detailorder::join('book','book.id_Book','=','detailorder.id_Book')->get();
+        foreach ($arrDetail as $detail) {
+            if(isset($detail->id_Discount)){
+                //lấy cuốn sách ĐANG khuyến mãi
+                $detailDis = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                 ->join('discount','discount.id_Discount','=','book.id_Discount')
+                 ->where('date_start','<=',$daynow)->where('date_end','>=',$daynow)
+                 ->where('book.id_Book',$detail->id_Book)
+                ->where('detailorder.id_Order',$detail->id_Order)
+                ->first();
+                if(isset($detailDis->id_Book)){
+                    $arrBookDis[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                    ->join('discount','discount.id_Discount','=','book.id_Discount')
+                    ->where('book.id_Book',$detail->id_Book)
+                    ->where('detailorder.id_Order',$detail->id_Order)
+                    ->first();
+                }else{
+                    $arrBookNotDis[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                    ->where('book.id_Book',$detail->id_Book)
+                    ->where('detailorder.id_Order',$detail->id_Order)
+                    ->first();
+                }
+                
+            } else{
+                $arrBook[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                ->where('book.id_Book',$detail->id_Book)
+                ->where('detailorder.id_Order',$detail->id_Order)
+                ->first();
+            }
+        }
 
 
-    	// $hii = order::whereYear('date_purchase','2019')->get();
-    	$arrDetail = detailorder::join('book','book.id_Book','=','detailorder.id_Book')->get();
-    	return view('admin.v_order_show',compact('arrOrder','arrDetail'));
+    	return view('admin.v_order_show',compact('arrOrder','arrBookDis','arrBook'));
     }
     public function invoice($orderID){
+        $daynow = new \DateTime();
     	$arrOrder = order::join('customer','customer.id_Cus','=','order.id_Cus')
     	->join('users','users.id','=','customer.id_Us')
     	->join('shipping_charges','shipping_charges.id_ship','=','customer.id_Ship')
@@ -81,19 +114,89 @@ class AdminOrderController extends Controller
             );
         }
         $sum = 0;
+        
         foreach ($arrDetail as $detail ) {
-            $sum += $detail->price_Book * $detail->amount_Order;
-            $mpdf->WriteHTML('<table style="width:100%;">
-                      <tr>
-                        <td style = "width:40%;">'.$detail->name_Book.'</td>
-                        <td style = "width:20%;" align="center">'.$detail->amount_Order.'</td>
-                        <td style = "width:20%;" align="center">'.$detail->price_Book.'</td>
-                        <td style = "width:20%;" align="center">'.$detail->price_Book * $detail->amount_Order.'</td>
-                      </tr>
-                     </table>
-
-                ');
+            if(isset($detail->id_Discount)){
+                //lấy cuốn sách ĐANG khuyến mãi
+                $detailDis = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                 ->join('discount','discount.id_Discount','=','book.id_Discount')
+                 ->where('date_start','<=',$daynow)->where('date_end','>=',$daynow)
+                 ->where('book.id_Book',$detail->id_Book)
+                ->where('detailorder.id_Order',$detail->id_Order)
+                ->first();
+                if(isset($detailDis->id_Book)){
+                    $arrBookDis[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                    ->join('discount','discount.id_Discount','=','book.id_Discount')
+                    ->where('book.id_Book',$detail->id_Book)
+                    ->where('detailorder.id_Order',$detail->id_Order)
+                    ->first();
+                }else{
+                    $arrBookNotDis[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                    ->where('book.id_Book',$detail->id_Book)
+                    ->where('detailorder.id_Order',$detail->id_Order)
+                    ->first();
+                }
+                
+            }
+            else{
+                $arrBook[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                ->where('book.id_Book',$detail->id_Book)
+                ->where('detailorder.id_Order',$detail->id_Order)
+                ->first();
+            }
         }
+                if(isset($arrBookDis)){
+                    foreach ($arrBookDis as $d) {        
+                        $total = ($d->price_Book - $d->price_Book*$d->number_Discount/100)*$d->amount_Order;
+                        $sum += $total;
+
+                        $price = $d->price_Book - $d->price_Book*$d->number_Discount/100;
+
+                        $mpdf->WriteHTML('<table style="width:100%;">
+                            <tr>
+                                <td style = "width:40%;">'.$d->name_Book.'</td>
+                                <td style = "width:20%;" align="center">'.$d->amount_Order.'</td>
+                                <td style = "width:20%;" align="center">'.$price.'đ</td>
+                                <td style = "width:20%;" align="center">'.$total.'đ</td>
+                            </tr>
+                            </table>
+                            ');
+                        }  
+                    }
+
+                    if(isset($arrBookNotDis)){
+                    foreach ($arrBookNotDis as $a) {
+                        $total = $a->price_Book*$a->amount_Order;
+                        $sum += $total;
+
+                        $mpdf->WriteHTML('<table style="width:100%;">
+                        <tr>
+                            <td style = "width:40%;">'.$a->name_Book.'</td>
+                            <td style = "width:20%;" align="center">'.$a->amount_Order.'</td>
+                            <td style = "width:20%;" align="center">'.$a->price_Book.'đ</td>
+                            <td style = "width:20%;" align="center">'.$total.'đ</td>
+                        </tr>
+                        </table>
+                        ');
+                    }
+                }
+
+                if(isset($arrBook)){
+                    foreach ($arrBook as $a) {
+                        $total = $a->price_Book*$a->amount_Order;
+                        $sum += $total;
+
+                        $mpdf->WriteHTML('<table style="width:100%;">
+                        <tr>
+                            <td style = "width:40%;">'.$a->name_Book.'</td>
+                            <td style = "width:20%;" align="center">'.$a->amount_Order.'</td>
+                            <td style = "width:20%;" align="center">'.$a->price_Book.'đ</td>
+                            <td style = "width:20%;" align="center">'.$total.'đ</td>
+                        </tr>
+                        </table>
+                        ');
+                    }
+                }
         $sum += $ship->charges;
         $mpdf->WriteHTML('<hr>
             <div align = "right">Phí Ship: '.$ship->charges.'đ</div>
@@ -103,8 +206,52 @@ class AdminOrderController extends Controller
             ');
 
         $mpdf->output();
-    }
+
+}
     public function orderFilter(Request $request){
+        $daynow = new \DateTime();
+        if(isset($_POST['submit'])){
+            
+        $arrOrder = order::join('customer','customer.id_Cus','=','order.id_Cus')
+        ->join('users','users.id','=','customer.id_Us')
+        ->join('shipping_charges','shipping_charges.id_ship','=','customer.id_Ship')
+        ->orderBy('date_purchase','desc')->orderBy('id_Order','desc')
+        ->paginate(10);
+
+        $arrDetail = detailorder::join('book','book.id_Book','=','detailorder.id_Book')->get();
+        foreach ($arrDetail as $detail) {
+            if(isset($detail->id_Discount)){
+                //lấy cuốn sách ĐANG khuyến mãi
+                $detailDis = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                 ->join('discount','discount.id_Discount','=','book.id_Discount')
+                 ->where('date_start','<=',$daynow)->where('date_end','>=',$daynow)
+                 ->where('book.id_Book',$detail->id_Book)
+                ->where('detailorder.id_Order',$detail->id_Order)
+                ->first();
+                if(isset($detailDis->id_Book)){
+                    $arrBookDis[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                    ->join('discount','discount.id_Discount','=','book.id_Discount')
+                    ->where('book.id_Book',$detail->id_Book)
+                    ->where('detailorder.id_Order',$detail->id_Order)
+                    ->first();
+                }else{
+                    $arrBookNotDis[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                    ->where('book.id_Book',$detail->id_Book)
+                    ->where('detailorder.id_Order',$detail->id_Order)
+                    ->first();
+                }
+                
+            } else{
+                $arrBook[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                ->where('book.id_Book',$detail->id_Book)
+                ->where('detailorder.id_Order',$detail->id_Order)
+                ->first();
+            }
+        }
+
+
+        return view('admin.v_order_show',compact('arrOrder','arrBookDis','arrBook','arrBookNotDis'));
+        }else{
         $status = $request->status;
         $arrOrder = order::join('customer','customer.id_Cus','=','order.id_Cus')
         ->join('users','users.id','=','customer.id_Us')
@@ -112,11 +259,41 @@ class AdminOrderController extends Controller
         ->where('status',$status)
         ->orderBy('date_purchase','desc')
         
-        ->get();
-
-        $arrStatus = order::select('status')->distinct()->get();
+        ->paginate(10);
         // $hii = order::whereYear('date_purchase','2019')->get();
         $arrDetail = detailorder::join('book','book.id_Book','=','detailorder.id_Book')->get();
-        return view('admin.v_order_show',compact('arrOrder','arrDetail','arrStatus'));
+        foreach ($arrDetail as $detail) {
+            if(isset($detail->id_Discount)){
+                //lấy cuốn sách ĐANG khuyến mãi
+                $detailDis = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                 ->join('discount','discount.id_Discount','=','book.id_Discount')
+                 ->where('date_start','<=',$daynow)->where('date_end','>=',$daynow)
+                 ->where('book.id_Book',$detail->id_Book)
+                ->where('detailorder.id_Order',$detail->id_Order)
+                ->first();
+                if(isset($detailDis->id_Book)){
+                    $arrBookDis[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                    ->join('discount','discount.id_Discount','=','book.id_Discount')
+                    ->where('book.id_Book',$detail->id_Book)
+                    ->where('detailorder.id_Order',$detail->id_Order)
+                    ->first();
+                }else{
+                    $arrBookNotDis[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                    ->where('book.id_Book',$detail->id_Book)
+                    ->where('detailorder.id_Order',$detail->id_Order)
+                    ->first();
+                }
+                
+            } else{
+                $arrBook[] = detailorder::join('book','book.id_Book','=','detailorder.id_Book')
+                ->where('book.id_Book',$detail->id_Book)
+                ->where('detailorder.id_Order',$detail->id_Order)
+                ->first();
+            }
+        }
+        if(isset($arrBookNotDis))
+            return view('admin.v_order_show',compact('arrOrder','arrBookDis','arrBook','arrBookNotDis'));
+        else return view('admin.v_order_show',compact('arrOrder','arrBookDis','arrBook'));
+    }
     }
 }

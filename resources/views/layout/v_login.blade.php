@@ -1,7 +1,10 @@
 @extends('layout.v_master')
 @section('body_login')
-@if(session('logincart'))
-    <section class="alert alert-warning text-center">{{session('logincart')}}</section>
+@if(isset($cartlogin))
+    <section class="alert alert-warning text-center">{{$cartlogin}}</section>
+@endif
+@if(isset($thongbao))
+    <section class="alert alert-warning text-center">{{$thongbao}}</section>
 @endif
 <div class="container-login d-flex">
 	<div class="wrap-login m-5">
@@ -10,17 +13,17 @@
 		</span>
 		<form class="login-form validate-form p-b-33 p-t-5" action="login" method="POST">
 			{{ csrf_field()}}
-			@if($errors->has('error'))
+			@if(isset($loi))
 				<div class="alert alert-danger">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					{{$errors->first('error')}}
+					{{$loi}}
 				</div>
 			@endif
 			<div class="wrap-input validate-input" data-validate = "Enter email">
-				<input class="input input" id="textarea" type="text" name="email" placeholder="Enter Email">
+				<input class="input input" id="textarea" type="text" name="email1" placeholder="Enter Email">
 				<span class="focus-input" data-placeholder="&#xe82a;"></span>
-				@if($errors->has('username'))
-					<p style="color:red">{{$errors->first('username')}}</p>
+				@if($errors->has('email1'))
+					<p style="color:red">{{$errors->first('email1')}}</p>
 				@endif
 			</div>
 
@@ -48,20 +51,26 @@
 		<form class="login-form validate-form p-b-33 p-t-5" action="register" method="POST">
 			{{csrf_field()}}
 			<div class="wrap-input validate-input" data-validate = "Enter name">
-				<input class="input input" id="textarea" type="text" name="name" placeholder="anh">
+				<input class="input input" id="textarea" type="text" name="name1" placeholder="anh">
 				<span class="focus-input" data-placeholder="&#xe82a;"></span>
 			</div>
-
+			@if($errors->has('name1'))
+				<p style="color:red">{{$errors->first('name1')}}</p>
+			@endif
 			<div class="wrap-input validate-input" data-validate = "Enter email">
 				<input class="input input" id="textarea" type="text" name="email" placeholder="a@gmail.com">
 				<span class="focus-input" data-placeholder="&#xe82a;"></span>
 			</div>
-
+			@if($errors->has('email'))
+				<p style="color:red">{{$errors->first('email')}}</p>
+			@endif
 			<div class="wrap-input validate-input" data-validate="Enter password">
-				<input class="input input" type="password" name="password" placeholder="1234">
+				<input class="input input" type="password" name="password1" placeholder="1234">
 				<span class="focus-input" data-placeholder="&#xe80f;"></span>
 			</div>
-
+			@if($errors->has('password1'))
+				<p style="color:red">{{$errors->first('password1')}}</p>
+			@endif
 			<div class="container-login-form-btn m-t-32">
 				<button class="login-form-btn" id="button">
 					Register

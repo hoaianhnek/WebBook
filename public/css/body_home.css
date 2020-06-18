@@ -1,202 +1,521 @@
 /*khoi san pham dau*/
-        .body{
-            margin-left:4.5rem;
-        }
-        .carousel-inner img{
-            width: 77rem;
-            height: 400px;
-        }
-        .carousel a{
-            margin-right: 2rem;
-            margin-left:-3rem;
-        }
-        .book-sell{
-            margin-top:3rem;
-            margin-right:5.5rem;
-        }
-        .book-sell a{
-            color: green;
-            margin-right: 10px;
-        }
-        .book-sell .row{
-            margin-top:3rem;
-            margin-left:0.5rem;
-            width: 100%;
-        }
-        .book-content{
-            display: flex;
-            flex-wrap: wrap;
-            clear: both;
-            width: 100%;
-        }
-        .book-content .col-3:hover{
-            transform: scale(0.97,0.97);
-            transition: all 0.5s;
-        }
-        .book-sell-content{
-            padding:10px;
-            width: 50%;
-            min-height: 180px;
-            max-height: 180px;
-            overflow: hidden;
-        }
-        .chitiet{
-            min-height: 70px;
-            max-height: 70px;
-            overflow: hidden;
-            font-size: 12px;
-            text-align: justify;
-        }
-        .book-sell-content a{
-            color:black;
-            font-weight: bold;
-        }
-        .book-sell-content a:hover{
-            color:green;
-        }
-        
-        .book-sell-img{
-            width: 50%;
-        }
-        .book-sell-top{
-            position: relative;
-        }
-        .book-sell-img img{
-            position: absolute;
-            box-shadow: 0px 2px 10px 1px rgba(41, 40, 40, 0.4); 
-            top: -20px;
-            z-index: 1;
-        }
-        .discount{
-            position: absolute;
-            top: -2.5rem;
-            left: -1rem;
-            background-color:red;
-            color:white;
-            padding:10px 5px;
-            border-radius:50%;
-            z-index: 2;
-            opacity:0.7;
-        }
-        .background-book-sell{
-            background-color: white;
-            padding:10px;
-            box-shadow: 0px 10px 10px 0px rgba(139, 112, 112, 0.4); 
-            cursor: pointer;
-            border:1px solid white;
-        }
-        .background-book-sell:hover{
-            border:1px solid green;
-        }
-        .price-entry{
-            text-decoration: line-through;
-            color:rgb(143, 134, 134);
-            font-size: 15px;
-        }
-        .price-present{
-            font-size: 20px;
-            color: red;
-            font-weight: bold;
-            padding-left:10px;
-        }
-        .book-new{
-            margin-top:3rem;
-            margin-right: 2rem;
-            margin-left: 6rem;
-        }
-        .book-new a{
-            color:green;
-        }
-        .book-new .row{
-            margin-top:3rem;
-            margin-left:0.5rem;
-        }
-        .book-new .book-sell-content a{
-            color:black;
-        }
-        .book-new .book-sell-content a:hover{
-            color:green;
-        }
+html,body{
+    margin:0; padding:0;
+}
+.carousel{
+    position: relative;
+    width: 100%;
+}
+.carousel-inner img{
+    width: 100%;
+    height: 400px;
+}
+.carousel a{
+    margin-right: -3rem;
+    margin-left:-3rem;
+}
+.book-sell{
+    margin-top:3rem;
+    margin-right:5.5rem;
+}
+.book-sell a{
+    color: green;
+    margin-right: 10px;
+}
+.book-sell .row{
+    margin-top:3rem;
+    margin-left:0.5rem;
+    width: 100%;
+}
+.book-content{
+    display: flex;
+    flex-wrap: wrap;
+    clear: both;
+    width: 100%;
+}
+.book-content .col-3:hover{
+    transform: scale(0.97,0.97);
+    transition: all 0.5s;
+}
+.book-sell-content{
+    padding:10px;
+    width: 50%;
+    min-height: 180px;
+    max-height: 180px;
+    overflow: hidden;
+}
+.chitiet{
+    min-height: 70px;
+    max-height: 70px;
+    overflow: hidden;
+    font-size: 12px;
+    text-align: justify;
+}
+.book-sell-content a{
+    color:black;
+    font-weight: bold;
+}
+.book-sell-content a:hover{
+    color:green;
+}
+
+.book-sell-img{
+    width: 50%;
+}
+.book-sell-top{
+    position: relative;
+}
+.book-sell-img img{
+    position: absolute;
+    box-shadow: 0px 2px 10px 1px rgba(41, 40, 40, 0.4); 
+    top: -20px;
+    z-index: 1;
+}
+.discount{
+    position: absolute;
+    top: -2.5rem;
+    left: -1rem;
+    background-color:red;
+    color:white;
+    padding:10px 5px;
+    border-radius:50%;
+    z-index: 2;
+    opacity:0.7;
+}
+.background-book-sell{
+    background-color: white;
+    padding:10px;
+    box-shadow: 0px 10px 10px 0px rgba(139, 112, 112, 0.4); 
+    cursor: pointer;
+    border:1px solid white;
+}
+.background-book-sell:hover{
+    border:1px solid green;
+}
+.price-entry{
+    text-decoration: line-through;
+    color:rgb(143, 134, 134);
+    font-size: 15px;
+}
+.price-present{
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+    padding-left:10px;
+}
+.book-new{
+    margin-top:3rem;
+    margin-right: 2rem;
+    margin-left: 6rem;
+}
+.book-new a{
+    color:green;
+}
+.book-new .row{
+    margin-top:3rem;
+    margin-left:0.5rem;
+}
+.book-new .book-sell-content a{
+    color:black;
+}
+.book-new .book-sell-content a:hover{
+    color:green;
+}
 /*het khoi san pham dau*/
 /*khoi san pham thu hai*/
 
 /*het khoi san pham thu 2*/
 /*hieu ung hien thi noi dung khi hover chuot len sp*/
-        .background-book-sell {
-            position: relative;
-            width: 100%;
-        }
-        .overlay {
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            right: 0;
-            background-color:#ffe066;
-            overflow: hidden;
-            width: 100%;
-            height:0;
-            transition: .5s ease;
-        }
-        .background-book-sell:hover .overlay {
-            bottom: 0;
-            height: 100%;
-            opacity: 0.5;
-        }
-        .text {
-            white-space: nowrap; 
-            color: white;
-            font-size: 50px;
-            position: absolute;
-            overflow: hidden;
-            top: 70%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-        }
-        #back-to-top {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            z-index: 9999;
-            width: 32px;
-            height: 32px;
-            text-align: center;
-            line-height: 30px;
-            background: #f5f5f5;
-            color: #33bbff;
-            cursor: pointer;
-            border: 0;
-            border-radius: 2px;
-            text-decoration: none;
-            transition: all 0.01s;
-            opacity: 0;
-        }
-        #back-to-top:hover {
-            background: green;
-        }
-        #back-to-top.show {
-            opacity: 1;
-        }
-      /*  Phân trang*/
-        .pagination{
-            margin-top:10px;
-            margin-left:50%;
-        }
-        .pagination a:hover {
-            background-color: green;
-        }
-        .page-item.active .page-link{
-            z-index: 1;
-            color: white;
-            background: green;
-            outline: none;
-            border-color:rgb(221, 215, 215);
-        }
-        .page-link:hover{
-            color: white;
-            background-color: #52FAB5;
-        }
-        .cart-btn{
-            border:none;
-            background-color: white;
-        }
+.background-book-sell {
+    position: relative;
+    width: 100%;
+}
+.overlay {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background-color:#ffe066;
+    overflow: hidden;
+    width: 100%;
+    height:0;
+    transition: .5s ease;
+}
+.background-book-sell:hover .overlay {
+    bottom: 0;
+    height: 100%;
+    opacity: 0.5;
+}
+.text {
+    white-space: nowrap; 
+    color: white;
+    font-size: 50px;
+    position: absolute;
+    overflow: hidden;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+#back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 30px;
+    background: #f5f5f5;
+    color: #33bbff;
+    cursor: pointer;
+    border: 0;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.01s;
+    opacity: 0;
+}
+#back-to-top:hover {
+    background: green;
+}
+#back-to-top.show {
+    opacity: 1;
+}
+/*  Phân trang*/
+.pagination{
+    margin-top:10px;
+    margin-left:50%;
+}
+.pagination a:hover {
+    background-color: green;
+}
+.page-item.active .page-link{
+    z-index: 1;
+    color: white;
+    background: green;
+    outline: none;
+    border-color:rgb(221, 215, 215);
+}
+.page-link:hover{
+    color: white;
+    background-color: #52FAB5;
+}
+.cart-btn{
+    border:none;
+    background-color: white;
+}
+/* section 2*/
+/*.cover{
+    width: 100%;
+    height: 55vmin;
+    background: url("../image/bacgroundflashsale.png");
+    background-position: -14rem -19rem;
+    background-size: 150%;
+    position: relative;
+}
+section.section-2.container-fluid.p-0{
+    margin-top: 1%;
+}
+
+.container-fluid{
+    width: 60%;
+}
+.cover .content{
+    background: rgba(248,246,246,0);
+    height: 100%;
+    width: 100%;
+    padding-top: 4vmin;
+}
+
+.cover .content>h1{
+    font-family: var(--Patua);
+    font-size: 6vmin;
+    color: #e30e0e;
+}
+
+.cover .content>p{
+    font-family: var(--Rubik);
+    font-size: 2vmin;
+    color: #e5e5e5;
+}
+
+.numbers .rect{
+    position: relative;
+    z-index: 1;
+    background: white;
+    width: 5rem;
+    height: 5rem;
+    padding-top: 3.5vmin;
+    margin: 1rem;
+    border-radius: 4.5em;
+    border-color:solid 1px #00e600;
+    box-shadow: 0px 0px 6px 3px rgba(19,248,21,0.3);
+}
+
+.numbers{
+    margin-top: -15vmin;
+}
+
+.numbers .rect h1{
+    font-size: 1rem;
+    color: tomato;
+}
+
+.numbers .rect p{
+    font-family: var(--Patua);
+}
+
+.purchase>h1{
+    padding-top: 15vmin;
+    padding-bottom: 0.1em;
+    font-family: var(--Lobster);
+}
+
+.purchase>p{
+    font-family: var(--light-black);
+    font-size: 3vmin;
+    padding-bottom: 10vmin;
+}
+
+.purchase .cards .card{
+    width: 22rem;
+    margin: 3vmin;
+}
+
+.cards div{
+    padding: 0;
+    margin: 0;
+}
+
+.cards .title{
+    background: rgba(208,241,241,0.199);
+    padding: 1.4rem 2.5rem;
+    font-size: 2vmin;
+}
+
+.card .card-text{
+    padding: 2.5rem 3rem;
+    color: var(--light-black);
+}
+
+.card-body .pricing{
+    background: rgba(208,241,241,0.199);
+    border-top-right-radius: 170px;
+    border-top-left-radius: 170px;
+}
+
+.card-body .pricing>h1{
+    font-size: 10vmin;
+    padding: 1em 0.5em;
+}*/
+/*chu de dưới*/
+
+.le{
+    width: 2px;
+}
+
+/* section 3*/
+
+.purchase>h1{
+    padding-top: 15vmin;
+    padding-bottom: 0.1em;
+    font-family: var(--Lobster);
+}
+
+.purchase .cards .card{
+    width: 22rem;
+    margin: 3vmin;
+}
+
+.cards div{
+    padding: 0;
+    margin: 0;
+}
+
+.cards .title{
+    background: rgba(208,241,241,0.199);
+    padding: 1.4rem 2.5rem;
+    font-size: 2vmin;
+}
+
+.card .card-text{
+    padding: 2.5rem 3rem;
+    color: var(--light-black);
+}
+
+.card-body .pricing{
+    background: rgba(208,241,241,0.199);
+    border-top-right-radius: 170px;
+    border-top-left-radius: 170px;
+}
+
+.card-body .pricing>h1{
+    font-size: 10vmin;
+    padding: 1em 0.5em;
+}
+
+/*hết chủ đề dưới*/
+
+/*blog carousel*/
+/*a.btn-floating.btn-secondary.button_next{
+    right: 0;
+    left: unset;
+    position: absolute;
+    border: none;
+    width: 45px;
+    height: 45px;
+    margin-top: -15px;
+    padding: 0;
+    top: 48%;
+    outline: none;
+    border-radius: 0;
+    white-space: nowrap;
+    margin-right: 175px;
+    margin-left: 0;
+    font-size: 30px;
+    opacity: .7;
+    cursor: pointer;
+    background: #ebebeb;
+}
+a.btn-floating.btn-secondary.button_prev{
+    left: 0;
+    position: absolute;
+    border: none;
+    width: 45px;
+    height: 45px;
+    margin-top: -15px;
+    padding: 0;
+    top: 48%;
+    outline: none;
+    border-radius: 0;
+    white-space: nowrap;
+    margin-right: 0;
+    margin-left: 98px;
+    font-size: 30px;
+    opacity: .7;
+    cursor: pointer;
+    background: #ebebeb;
+}
+a.btn-floating.btn-secondary.button_next:hover{
+    background: #99ff99;
+}
+a.btn-floating.btn-secondary.button_prev:hover{
+    background: #99ff99;
+}*/
+
+/*het blog carousel*/
+
+/*SACH VAN HOC*/
+.heading1 h2 a{
+    text-transform: uppercase;
+    display: inline-block;
+    color: #252525;
+}
+.heading1 h2 a:hover{
+    color: #00b316;
+    text-decoration: none;
+    cursor: pointer;
+}
+.heading1 h2{
+    font-size: 24px;
+    font-family: var(--Patua);
+    text-align: left;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding-left: 14px;
+    padding-right: 15px;
+    background: #f3f3f5;
+    z-index: 999;
+    display: block;
+}
+.heading1{
+    float: left;
+}
+.section_base .col-lg-12 .title_top_menu_index:before{
+    position: absolute;
+    content: "";
+    width: 68%;
+    height: 3px;
+    background: #ebebeb;
+    top: 13px;
+    left: 20%;
+}
+.section_base .col-lg-12 .title_top_menu_index {
+    display: block;
+    margin: 0;
+    position: relative;
+    margin-bottom: 40px;
+}
+.heading1 h2:before{
+    content: "";
+    background: #f9c80b;
+    width: 6px;
+    height: 20px;
+    position: absolute;
+    left: 0px;
+    top: 6px;
+}
+.btn_xemthem{
+    display: inline-block;
+    height: 43px;
+    line-height: 42px;
+    padding: 0 25px;
+    text-align: center;
+    white-space: nowrap;
+    outline: none !important;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+    box-shadow: 0px 8px 18px 0px rgba(81,81,81,0.14);
+}
+
+.btn_xemthem:hover {
+    background: #00d664;
+    color: #fff !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+.hidden-xs a{
+    padding-top: 4px;
+}
+hr.stars {
+    width: 73%;
+    margin-left: 15%;
+}
+.section_base .title_top_menu_index .xemthem_tab{
+    display: block;
+    float: right;
+    position: absolute;
+    right: 0;
+    top: -10px;
+    z-index: 999;
+}
+.stars {
+  height: auto;
+  color: gold;
+  text-align: center;
+  &:after {
+    content: "★";
+    font-size: 2em;
+    text-shadow:
+      -2em 0,
+      -1em 0,
+       1em 0,
+       2em 0;
+  }
+}
+/*HẾT SÁCH VĂN HỌC*/
+/*banner bottom*/
+section.banner_bottom{
+    margin-top: 96px;
+}
+/*het banner bottom*/
+@media only screen and (max-width: 768px){
+    a.carousel-control-prev{
+        left: 27px;
+    }
+    a.carousel-control-next {
+        right: 27px;
+    }
+}

@@ -50,14 +50,13 @@
                 <span class="mr-5">Số tiền</span>
                 <span class="ml-5">{{Cart::subtotal()}} đ</span>
             </div>
-            @foreach($customer as $cus)
             <div class="d-flex justify-content-end pr-5">
                 <span class="mr-5">Phí vận chuyển</span>
                 <span class="ml-5">
                     <?php $tax = 0;?>
-                    @if($cus->id_Ship != null)
+                    @if(isset($customer->id_Ship))   
                         <?php
-                        $tax = $cus->charges;
+                        $tax = $customer->charges;
                         echo $tax;
                         ?>
                     @else
@@ -66,7 +65,6 @@
                     đ
                 </span>
             </div>
-            @endforeach
         </div>
         
         <hr>

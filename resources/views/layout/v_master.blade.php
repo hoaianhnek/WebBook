@@ -14,6 +14,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+        <!-- AOS     library -->
+   <!--  <script type="text/javascript" src="../../  public/js/aos.js"></script> -->
+
+     <!-- AOS library -->
+    <!-- <link rel="stylesheet" href="../../public/css/aos.css"> -->
     <!-- link css-->
     <link rel="stylesheet" type="text/css" href="../../public/css/icon-font.min.css">
      
@@ -30,15 +35,21 @@
 </head>
 <body>
     <div class="header color-header"> 
+        <div class="banner">
+            <img class="banner_top" src="../image/bg_banner_top.png" alt="" width="100%">
+        </div> 
         <div class="d-flex">
                     <!--logo-->
-            <a href="master-home"><img src="../image/logo.png" alt="BOOK STORE" data-toggle="tooltip" title="Book Store"></a>
+            <a href="master-home" class="logobookstore"><img src="../image/logo.png" alt="BOOK STORE" data-toggle="tooltip" title="Book Store"></a>
                 <!--search-->
-            <form class="form-inline" action="/action_page.php">
-                    <input class="form-control mr-sm-2 " id="search-book" type="text" placeholder="Tìm kiếm tên sách">
-                    <button class="btn btn-success" type="submit" id="btnSearch">Tìm kiếm
-                        <i class="fas fa-search"></i>
-                    </button>
+           <form class="form-inline" action="/action_page.php">
+                <input class="form-control mr-sm-2" id="search-book" type="text" placeholder="Tìm kiếm tên sách">
+                <span class="input-group-btn">
+                    <button class="btn icon-fallback-text">
+                        <span class="fa fa-search">
+                        </span>
+                    </button>   
+                </span>
             </form>
             <div class="cart-menu">
                 <a href="showcart"><img src="../image/giohang.gif" alt="Giỏ hàng" class="cart"></a>
@@ -80,6 +91,7 @@
             </div>
         </div>
     </div>
+    <div id="body">
 
     @yield('body_home')
     @yield('test')
@@ -95,7 +107,22 @@
     @yield('body_search')
     @yield('body_checkout')
     @yield('alart_success')
-
+    </div>
     @include('layout.v_footer')
 </body>
+<script type="text/javascript">
+    $("#search-book").on('keyup',function(){
+        $search = $(this).val();
+        $.ajax({
+            type:'get',
+            url:"{{URL::to('bookstore/searchAjax')}}",
+            data:{'search':$search},
+            dataType:"text",//dữ liệu trả về
+            success:function(data){
+                    $('#body').html(data); 
+                }
+        });
+    });
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
 </html>

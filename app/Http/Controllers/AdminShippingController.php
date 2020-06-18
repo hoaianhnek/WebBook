@@ -19,7 +19,6 @@ class AdminShippingController extends Controller
 
         $Ship = shipping_charges::where('country',$request->country)->first();
         
-           print_r($Ship);
             if($Ship != null){
                 $message = "Tỉnh/ Thành phố đã tồn tại";
                 echo "<script type='text/javascript'>alert('$message');</script>";

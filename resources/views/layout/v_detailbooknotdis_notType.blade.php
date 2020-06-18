@@ -2,10 +2,10 @@
 @section('body_detailbooknotdis_nottype')
 
 <div class="container-fluid">
+    @foreach($arrBookID as $Book)
     <div class="container-product d-flex">
         <div class="row">
-            @foreach($arrBookID as $Book)
-            <div class="col-6 text">
+            <div class="col-6">
                 <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}">
             </div>
             <div class="col-6">
@@ -15,7 +15,7 @@
                     <form action = "{{URL::to('bookstore/showcart')}}" method="POST">
                         {{ csrf_field() }}
                         <div class="d-flex">
-                            <input class="text-danger pricediscount" name ="pricediscount" type="text" value="{{$Book->price_Book}}"><label class="text-danger pricediscount">đ</label>
+                            <input class="text-danger pricediscount" name ="pricediscount" type="text" value="{{$Book->price_Book}}"><label class="text-danger dpricediscount" style="font-size: 24px">đ</label>
                         </div>
                         <hr>
                         <div">
@@ -29,8 +29,9 @@
                         <div>
                             <input type="submit" value="Mua Ngay" class="container-product-content-cart mr-4">
                             <input type="hidden" name = "bookid_hidden" value="{{$Book->id_Book}}">
+                            <a href="cart-add-{{$Book->id_Book}}"><input type="button" name = "" value="Thêm Vào Giỏ Hàng" class="container-product-content-add-cart"></a>
                     </form>
-                    <input type="button" value="Thêm Vào Giỏ Hàng" class="container-product-content-add-cart">
+                    
                     </div>
                     <div class="container-product-content-warning">
                         <i class="fas fa-exclamation-circle">
@@ -51,8 +52,8 @@
                 <td>{{$Book->id_Book}}</th>
             </tr>
             <tr>
-                <th>Tên nhà cung cấp</th>
-                <td>{{$Book->supplier_Book}}</th>
+                <th>Tên sách</th>
+                <td>{{$Book->name_Book}}</th>
             </tr>
             <tr>
                 <th>Tác giả</th>
@@ -81,7 +82,7 @@
                 <div class="text-center container-kind-same-content">
                     <div class="container-kind-same-img p-4">
                         <a href="master-{{$Book->id_Book}}" class="container-kind-same-top">
-                            <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}">
+                            <img src="../image/{{$Book->image_Book}}" alt="{{$Book->name_Book}}" width="160px">
                         </a>
                     </div>
                     <div class="text-centers">

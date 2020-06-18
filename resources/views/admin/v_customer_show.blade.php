@@ -14,12 +14,9 @@
           <div class="col-sm-4">
           </div>
           <div class="col-sm-3">
-            <div class="input-group">
-              <input type="text" class="input-sm form-control" placeholder="Search">
-              <span class="input-group-btn">
-              <button class="btn btn-sm btn-default" type="button">Go!</button>
-              </span>
-            </div>
+            <li style="list-style-type: none;">
+                <input type="text" class="form-control search" id="search" placeholder=" Search">
+            </li>
           </div>
         </div>
           <div class="table-responsive">
@@ -31,11 +28,13 @@
                     <th>Email</th>
                     <th data-breakpoints="xs">SĐT</th>
                     <th>Địa chỉ</th>
+                    <th>Tỉnh/ thành phố</th>
                     <th style="width:30px;"></th>
                     </tr>
                   </thead>
                   <tbody>
                         @foreach($arrCus as $Cus)
+                        @if(isset($Cus->id_Cus))
                     	<tr>
   	                    <td>{{$Cus->id_Cus}}</td>
   	                    <td>
@@ -47,10 +46,11 @@
                       	<td>
                     		<span class="text-ellipsis">{{$Cus->phone_Cus}}</span>
                       	</td>
+                        <td>
+                        <span class="text-ellipsis">{{$Cus->add_Cus}}</span>
+                        </td>
                       	<td>
-                          @if(isset($Cus->id_Ship))
-                        		<span class="text-ellipsis">{{$Cus->country}}</span>
-                            @endif
+                        		
                       	</td>
   	                    <td>
   	                      	<a href="customer-edit-view-{{$Cus->id_Cus}}" class="active" ui-toggle-class="">
@@ -61,6 +61,37 @@
   	                      	</a>
   	                    </td>
                     	</tr>
+                        @endif
+                        @endforeach
+                        @foreach($arrCusAddr as $Cus)
+                        @if(isset($Cus->id_Cus))
+                      <tr>
+                        <td>{{$Cus->id_Cus}}</td>
+                        <td>
+                        <span class="text-ellipsis">{{$Cus->name}}</span>
+                        </td>
+                        <td>
+                        <span class="text-ellipsis">{{$Cus->email}}</span>
+                        </td>
+                        <td>
+                        <span class="text-ellipsis">{{$Cus->phone_Cus}}</span>
+                        </td>
+                        <td>
+                        <span class="text-ellipsis">{{$Cus->add_Cus}}</span>
+                        </td>
+                        <td>
+                            <span class="text-ellipsis">{{$Cus->country}}</span>
+                        </td>
+                        <td>
+                            <a href="customer-edit-view-{{$Cus->id_Cus}}" class="active" ui-toggle-class="">
+                              <i class="fa fa-edit text-success text-active"></i>
+                            </a>
+                            <a href="customer-delete-{{$Cus->id_Cus}}" class="active" ui-toggle-class="">
+                              <i class="fa fa-times text-danger text"></i>
+                            </a>
+                        </td>
+                      </tr>
+                      @endif
                         @endforeach
                   </tbody>
               </table>
@@ -72,5 +103,19 @@
         </div>
       </div>
   </section>
+  <script type="text/javascript">
+      $("#search").on('keyup',function(){
+        $search = $(this).val();
+        $.ajax({
+          type:'get',
+          url:"{{URL::to('admin/customer-load-ajax')}}",
+          data: {'search':$search},
+          dataType:"text",
+          success:function(data){
+            $("tbody").html(data);
+          }
+        });
+      });
+  </script>
 
 @stop

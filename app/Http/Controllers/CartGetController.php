@@ -34,7 +34,7 @@ class CartGetController extends Controller
         $customer = customer::join('users','customer.id_Us','=','users.id')
         ->join('shipping_charges','shipping_charges.id_ship','=','customer.id_Ship')
         ->where('customer.id_Us',$id_Us)->get();
-		$arrType = category::all();
+		$arrType = category::where('status_Category','=','true')->get();
 		return view('layout.v_shoppingcart',compact('arrType','customer'));
    
     }
